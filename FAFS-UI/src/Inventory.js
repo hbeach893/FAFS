@@ -5,9 +5,25 @@ import {
   Text,
   View
 } from 'react-native';
-import { inventory } from './data';
+//import { inventory } from './data';
 import ItemDisplay from './ItemDisplay';
 import ItemPopup from './ItemPopup';
+import { connect } from 'react-redux';
+import {
+  ActivityIndicator,
+  RefreshControl,
+  // ...others
+} from 'react-native';
+
+@connect(
+  state => ({
+    inventoryitems: state.inventoryitems,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    refresh: () => dispatch({type: 'GET_INVENTORY_DATA'}),
+  }),
+)
 
 export default class Inventory extends Component {
   // Add starting here
@@ -29,20 +45,34 @@ export default class Inventory extends Component {
   }
   // Untill here
   render() {
+    const { inventoryitems, loading, refresh } = this.props;
     return (
       <View style={styles.container}>
+      { inventoryitems ?
         <ScrollView
           contentContainerStyle={styles.scrollContent}
 		  // Hide all scroll indicators
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
+          refreshControl={
+                <RefreshControl
+                  refreshing={loading}
+                  onRefresh={refresh}
+                />
+              }
         >
-          {inventory.map((item, index) => <ItemDisplay
+          {inventoryitems.map((item, index) => <ItemDisplay
             item={item}
             onOpen={this.openItem}
             key={index}
           />)}
         </ScrollView>
+        : <ActivityIndicator
+              animating={loading}
+              style={styles.loader}
+              size="large"
+            />
+          }
         <ItemPopup
           item={this.state.item}
           isOpen={this.state.popupIsOpen}
@@ -55,9 +85,11 @@ export default class Inventory extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingTop: 20,         // start below status bar
   },
   scrollContent: {
+    flex: 1,
     flexDirection: 'row',   // arrange posters in rows
     flexWrap: 'wrap',       // allow multiple rows
   },
