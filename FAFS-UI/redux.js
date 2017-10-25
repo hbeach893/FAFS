@@ -1,4 +1,6 @@
-import { Platform } from 'react-native';
+import { Platform, Alert } from 'react-native';
+import { createStore, combineReducers } from 'redux';
+import { reducer as form } from 'redux-form';
 
 const API = Platform.OS === 'android'
   ? 'http://10.0.3.2:3000/v1' // works for Genymotion
@@ -11,7 +13,7 @@ export const apiMiddleware = store => next => action => {
     // In case we receive an action to send an API request
     case 'GET_INVENTORY_DATA':
       // Dispatch GET_INVENTORY_DATA_LOADING to update loading state
-      store.dispatch({type: 'GET_INVENTORY_DATA_LOADING'});
+      store.dispatch({type: 'GET_INVENTORY_DATA_LOADING', inventoryitems: [], loading: true});
       // Make API call and dispatch appropriate actions when done
       fetch(`${API}/inventoryitems.json`)
         .then(response => response.json())
@@ -30,8 +32,7 @@ export const apiMiddleware = store => next => action => {
   }
 };
 
-
-export const reducer = (state = { inventoryitems: [], loading: true }, action) => {
+const inventoryStatus = (state = { inventoryitems: [], loading: true }, action) => {
   switch (action.type) {
     case 'GET_INVENTORY_DATA_LOADING':
       return {
@@ -49,3 +50,10 @@ export const reducer = (state = { inventoryitems: [], loading: true }, action) =
       return state;
     }
 };
+
+
+
+export const reducers = combineReducers({
+  inventoryStatus,
+  form
+});

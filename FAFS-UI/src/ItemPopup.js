@@ -184,9 +184,9 @@ export default class ItemPopup extends Component {
   getStyles = () => {
     return {
       imageContainer: this.state.expanded ? {
-        width: width / 2,         // half of screen widtj
+        width: width,         // half of screen widtj
       } : {
-        maxWidth: 110,            // limit width
+        maxWidth: 200,            // limit width
         marginRight: 10,
       },
       movieContainer: this.state.expanded ? {
@@ -255,6 +255,7 @@ export default class ItemPopup extends Component {
                 <Text style={[styles.title, this.getStyles().title]}>{title}</Text>
                 <Text style={styles.price}>{price}</Text>
               </View>
+
             </View>
 
             {/* Showtimes */}

@@ -17,11 +17,11 @@ import {
 
 @connect(
   state => ({
-    inventoryitems: state.inventoryitems,
-    loading: state.loading,
+    inventoryitems: state.inventoryStatus.inventoryitems,
+    loading: state.inventoryStatus.loading,
   }),
   dispatch => ({
-    refresh: () => dispatch({type: 'GET_INVENTORY_DATA'}),
+    refresh: () => dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true}),
   }),
 )
 

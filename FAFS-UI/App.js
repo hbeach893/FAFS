@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { apiMiddleware, reducer } from './redux';
+import { apiMiddleware, reducers } from './redux';
 import {
   Navigator,
 } from 'react-native-deprecated-custom-components';
-import Inventory from './src/Inventory';
+import {
+  Alert
+} from 'react-native';
+import InventoryPageContainer from './src/InventoryPageContainer';
+import UploadPageContainer from './src/UploadPageContainer';
 
 const RouteMapper = (route, navigator) => {
   if (route.name === 'inventory') {
-    return <Inventory navigator={navigator} />;
+    return <InventoryPageContainer navigator={navigator} />;
+  }
+  if (route.name === 'upload') {
+    return <UploadPageContainer navigator={navigator}/>;
   }
 };
 
 // Create Redux store
-const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
+const store = createStore(reducers, {}, applyMiddleware(apiMiddleware));
 
 // Fetch inventory data
-store.dispatch({type: 'GET_INVENTORY_DATA'});
+store.dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true});
 
 export default class App extends Component {
   render() {
