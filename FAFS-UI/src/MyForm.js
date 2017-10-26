@@ -1,10 +1,9 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import moment from 'moment';
 
 import MyTextInput from './MyTextInput';
-import styles from './MyForm.styles';
 
 /**
  * Automatically adds the dashes required by the specified phone format and limits the input to ten characters
@@ -100,3 +99,17 @@ function MyForm(props) {
 export default reduxForm({
   form: 'uploadItem'
 })(MyForm);
+
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 45
+  },
+  formSubmit: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginTop: 25,
+    padding: 5
+  }
+});

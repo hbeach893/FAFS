@@ -12,6 +12,7 @@ export const apiMiddleware = store => next => action => {
   switch (action.type) {
     // In case we receive an action to send an API request
     case 'GET_INVENTORY_DATA':
+      Alert.alert('HELLO!');
       // Dispatch GET_INVENTORY_DATA_LOADING to update loading state
       store.dispatch({type: 'GET_INVENTORY_DATA_LOADING', inventoryitems: [], loading: true});
       // Make API call and dispatch appropriate actions when done

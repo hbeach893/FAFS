@@ -1,7 +1,7 @@
 import React from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { TextInput, View, Text, StyleSheet } from 'react-native';
 
-import styles from './MyTextInput.styles';
+
 
 /**
  * to be wrapped with redux-form Field component
@@ -43,3 +43,21 @@ MyTextInput.propTypes = {
     visited: React.PropTypes.bool.isRequired
   }).isRequired
 };
+
+const styles = StyleSheet.create({
+  input: {
+    height: 30,
+    padding: 5
+  },
+  inputContainer: {
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.4)',
+    marginTop: 20
+  },
+  valid: {
+    borderColor: '#53E69D'
+  },
+  invalid: {
+    borderColor: '#F55E64'
+  }
+});
