@@ -257,19 +257,18 @@ export default class ItemPopup extends Component {
               </View>
 
             </View>
-
-            {/* Showtimes */}
+            {/*
             <View>
-              {/* Day */}
+
               <Text style={styles.sectionHeader}>Day</Text>
-              {/* TODO: Add day options here */}
+
               <Text>Add day options here</Text>
-              {/* Time */}
+
               <Text style={styles.sectionHeader}>Showtime</Text>
-              {/* TODO: Add show time options here */}
+
               <Text>Add show time options here</Text>
             </View>
-
+            */}
           </View>
 
           {/* Footer */}

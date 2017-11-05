@@ -21,10 +21,11 @@ const RouteMapper = (route, navigator) => {
 };
 
 // Create Redux store
-const store = createStore(reducers, {}, applyMiddleware(apiMiddleware));
+export const store = createStore(reducers, {}, applyMiddleware(apiMiddleware));
 
-// Fetch inventory data
+
 store.dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true});
+
 
 export default class App extends Component {
   render() {

@@ -13,20 +13,24 @@ import {
   Alert,
   FormValidationMessage
 } from 'react-native';
+import {store} from '../App.js';
 
-@connect(
-  state => ({
-    inventoryitems: state.inventoryStatus.inventoryitems,
-    loading: state.inventoryStatus.loading,
-  }),
-  dispatch => ({
-    refresh: () => dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true}),
-  }),
-)
+const addItem = (item) => {
+  const itemObj = {}
+  itemObj.title = item.itemName;
+  itemObj.desc = item.itemDescription;
+  itemObj.image = item.itemImage;
+  itemObj.price = item.itemPrice;
+  itemObj.ownerEmail = item.email;
+  itemObj.datePosted = new Date();
+  itemObj.type = [];
+  store.dispatch({type:'ADD_ITEM', newitem: itemObj});
+
+}
 
 export default class UploadPageContainer extends Component {
   render() {
-    const { inventoryitems, loading, refresh } = this.props;
+    const { refresh } = this.props;
     return (
       <View style={styles.container}>
         <Button onPress={() => this.props.navigator.pop()}
@@ -34,7 +38,7 @@ export default class UploadPageContainer extends Component {
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
-        <MyForm onSubmit={(values) => refresh}/>
+        <MyForm onSubmit={(item) =>  addItem(item)}/>
       </View>
     )
   }

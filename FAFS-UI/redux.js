@@ -12,11 +12,10 @@ export const apiMiddleware = store => next => action => {
   switch (action.type) {
     // In case we receive an action to send an API request
     case 'GET_INVENTORY_DATA':
-      Alert.alert('HELLO!');
       // Dispatch GET_INVENTORY_DATA_LOADING to update loading state
       store.dispatch({type: 'GET_INVENTORY_DATA_LOADING', inventoryitems: [], loading: true});
       // Make API call and dispatch appropriate actions when done
-      fetch(`${API}/inventoryitems.json`)
+      fetch(`${API}/inventoryitems`)
         .then(response => response.json())
         .then(data => next({
           type: 'GET_INVENTORY_DATA_RECEIVED',
@@ -30,6 +29,25 @@ export const apiMiddleware = store => next => action => {
     // Do nothing if the action does not interest us
     default:
       break;
+
+    case 'ADD_ITEM':
+
+      const request = new Request(
+        `${API}/inventoryitems` ,
+           {
+             method:'POST',
+             body: JSON.stringify(action.newitem),
+             headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            }}
+         )
+         fetch(request)
+         .then((response)=>{
+           if (response.ok){
+             return response._bodyInit;
+           }
+         })
   }
 };
 

@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,         // start below status bar
   },
   scrollContent: {
-    flex: 1,
     flexDirection: 'row',   // arrange posters in rows
     flexWrap: 'wrap',       // allow multiple rows
   },
