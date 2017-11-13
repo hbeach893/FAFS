@@ -5,7 +5,28 @@ import moment from 'moment';
 
 import MyTextInput from './MyTextInput';
 
-
+const validate = values => {
+  const errors = {}
+  if(!values.itemName) {
+    errors.itemName = 'Item name is required.'
+  }
+  if(!values.itemDescription) {
+    errors.itemDescription = 'Item description is required.'
+  }
+  if(!values.itemPrice) {
+    errors.itemPrice = 'Item price is required.'
+  } else if (!/^[1-9]\d*(?:\.\d{0,2})?$/i.test(values.itemPrice)) {
+    errors.itemPrice = 'Item price must be a valid currency.' }
+  if(!values.itemImage) {
+    errors.itemImage = 'Item image is required.'
+  }
+  if(!values.email) {
+    errors.email = 'Email is required.'
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+  return errors
+}
 
 function MyForm(props) {
   return (
@@ -50,7 +71,8 @@ function MyForm(props) {
 
 
 export default reduxForm({
-  form: 'uploadItem'
+  form: 'uploadItem',
+  validate
 })(MyForm);
 
 

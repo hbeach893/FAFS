@@ -24,6 +24,7 @@ export default function MyTextInput(props) {
         value={input.value}
         style={styles.input}
       />
+      { meta.touched && meta.error && <Text>{ meta.error }</Text> }
     </View>
   );
 }
