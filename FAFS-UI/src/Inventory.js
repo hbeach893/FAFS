@@ -3,7 +3,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
+  Alert
 } from 'react-native';
 //import { inventory } from './data';
 import ItemDisplay from './ItemDisplay';
@@ -15,6 +16,10 @@ import {
   // ...others
 } from 'react-native';
 
+
+
+
+
 @connect(
   state => ({
     inventoryitems: state.inventoryStatus.inventoryitems,
@@ -24,6 +29,8 @@ import {
     refresh: () => dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true}),
   }),
 )
+
+
 
 export default class Inventory extends Component {
   // Add starting here
@@ -43,9 +50,13 @@ export default class Inventory extends Component {
       popupIsOpen: false,
     });
   }
+
+
   // Untill here
   render() {
     const { inventoryitems, loading, refresh } = this.props;
+
+
     return (
       <View style={styles.container}>
       { inventoryitems ?

@@ -19,7 +19,9 @@ export const apiMiddleware = store => next => action => {
         .then(response => response.json())
         .then(data => next({
           type: 'GET_INVENTORY_DATA_RECEIVED',
-          data
+          sortKey: 'A_TO_Z',
+          data,
+
         }))
         .catch(error => next({
           type: 'GET_INVENTORY_DATA_ERROR',
@@ -47,22 +49,30 @@ export const apiMiddleware = store => next => action => {
            if (response.ok){
              return response._bodyInit;
            }
-         })
+         }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA', sortKey: 'A_TO_Z'}));
   }
 };
 
-const inventoryStatus = (state = { inventoryitems: [], loading: true }, action) => {
+const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: 'A_TO_Z' }, action) => {
   switch (action.type) {
+
     case 'GET_INVENTORY_DATA_LOADING':
       return {
         ...state,                   // keep the existing state,
         loading: true,              // but change loading to true
       };
     case 'GET_INVENTORY_DATA_RECEIVED':
+      var sortedInventoryItems = sortByKey(action.data.inventoryitems, 'A_TO_Zsd');
       return {
         loading: false,             // set loading to false
-        inventoryitems: action.data.inventoryitems, // update inventoryitems array with reponse data
+        inventoryitems: sortedInventoryItems, // update inventoryitems array with reponse data
       };
+    case 'SORT_BY_SORT_KEY':
+      var sortedInventoryItems = sortByKey(action.inventoryitems, action.sortKey);
+      return {
+        ...state,
+        inventoryitems: sortedInventoryItems,
+      }
     case 'GET_INVENTORY_DATA_ERROR':
       return state;
     default:
@@ -72,7 +82,64 @@ const inventoryStatus = (state = { inventoryitems: [], loading: true }, action) 
 
 
 
+const compareNameAtoZ = (a,b) => {
+  if (a.title < b.title)
+    return -1;
+  if (a.title > b.title)
+    return 1;
+  return 0;
+}
+
+const compareNameZtoA = (a,b) => {
+  if (a.title > b.title)
+    return -1;
+  if (a.title < b.title)
+    return 1;
+  return 0;
+}
+
+const comparePriceLoToHi= (a,b) => {
+  var a = a.price.replace("$", "");
+  var b = b.price.replace("$", "");
+  a = parseFloat(a);
+  b = parseFloat(b);
+  if (a < b)
+    return -1;
+  if (a > b)
+    return 1;
+  return 0;
+}
+
+const comparePriceHiToLo= (a,b) => {
+  var a = a.price.replace("$", "");
+  var b = b.price.replace("$", "");
+  a = parseFloat(a);
+  b = parseFloat(b);
+  if (a > b)
+    return -1;
+  if (a < b)
+    return 1;
+  return 0;
+}
+
+const sortByKey = (myArray, sortKey) => {
+  if (sortKey == 'A_TO_Z') {
+    return myArray.slice().sort(compareNameAtoZ);
+  } 
+  if (sortKey == 'Z_TO_A') {
+    return myArray.slice().sort(compareNameZtoA);
+  } 
+  if (sortKey == 'LO_TO_HI') {
+    return myArray.slice().sort(comparePriceLoToHi);
+  } 
+  if (sortKey == 'HI_TO_LO') {
+    return myArray.slice().sort(comparePriceHiToLo);
+  } 
+  else {
+    return myArray.slice();
+  }
+}
+
 export const reducers = combineReducers({
-  inventoryStatus,
-  form
+  inventoryStatus
 });
