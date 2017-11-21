@@ -19,7 +19,7 @@ export const apiMiddleware = store => next => action => {
         .then(response => response.json())
         .then(data => next({
           type: 'GET_INVENTORY_DATA_RECEIVED',
-          sortKey: 'A_TO_Z',
+          sortKey: 'A-Z',
           data,
 
         }))
@@ -49,11 +49,11 @@ export const apiMiddleware = store => next => action => {
            if (response.ok){
              return response._bodyInit;
            }
-         }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA', sortKey: 'A_TO_Z'}));
+         }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA', sortKey: 'A-Z'}));
   }
 };
 
-const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: 'A_TO_Z' }, action) => {
+const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: 'A-Z' }, action) => {
   switch (action.type) {
 
     case 'GET_INVENTORY_DATA_LOADING':
@@ -62,7 +62,7 @@ const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: '
         loading: true,              // but change loading to true
       };
     case 'GET_INVENTORY_DATA_RECEIVED':
-      var sortedInventoryItems = sortByKey(action.data.inventoryitems, 'A_TO_Zsd');
+      var sortedInventoryItems = sortByKey(action.data.inventoryitems, 'A-Z');
       return {
         loading: false,             // set loading to false
         inventoryitems: sortedInventoryItems, // update inventoryitems array with reponse data
@@ -123,16 +123,16 @@ const comparePriceHiToLo= (a,b) => {
 }
 
 const sortByKey = (myArray, sortKey) => {
-  if (sortKey == 'A_TO_Z') {
+  if (sortKey == 'A-Z') {
     return myArray.slice().sort(compareNameAtoZ);
   } 
-  if (sortKey == 'Z_TO_A') {
+  if (sortKey == 'Z-A') {
     return myArray.slice().sort(compareNameZtoA);
   } 
-  if (sortKey == 'LO_TO_HI') {
+  if (sortKey == 'Price: Low to High') {
     return myArray.slice().sort(comparePriceLoToHi);
   } 
-  if (sortKey == 'HI_TO_LO') {
+  if (sortKey == 'Price: High to Low') {
     return myArray.slice().sort(comparePriceHiToLo);
   } 
   else {

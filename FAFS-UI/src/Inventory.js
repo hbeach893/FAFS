@@ -97,7 +97,7 @@ export default class Inventory extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,         // start below status bar
+    paddingTop: 30,         // start below status bar
   },
   scrollContent: {
     flexDirection: 'row',   // arrange posters in rows

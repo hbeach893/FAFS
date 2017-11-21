@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Inventory from './Inventory';
 import NavBar from './NavBar';
-import SelectBar from './SelectBar';
+import FilterSection from './FilterSection';
+
 import {
   View,
   StyleSheet,
@@ -18,8 +19,9 @@ export default class InventoryPageContainer extends Component {
     return (
       <View style={styles.container}>
         <NavBar navigator={this.props.navigator}/>
-        <SelectBar/>
+        <FilterSection/>
         <Inventory/>
+
 
       </View>
     )
@@ -29,6 +31,6 @@ export default class InventoryPageContainer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,         // start below status bar
+    paddingTop: 40,         // start below status bar
   },
 });
