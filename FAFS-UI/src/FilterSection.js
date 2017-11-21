@@ -23,7 +23,8 @@ export default class FilterSection extends Component {
   render(){
     return (
       <View style = {styles.container}>
-        <ModalDropdown textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Price: Low to High', 'Price: High to Low', 'A-Z', 'Z-A']} defaultValue="Sort" onSelect={(itemIndex, itemValue) => {this.props.sort(this.props.inventoryitems, itemValue)}}/>
+        <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Price: Low to High', 'Price: High to Low', 'A-Z', 'Z-A']} defaultValue="Sort" onSelect={(itemIndex, itemValue) => {this.props.sort(this.props.inventoryitems, itemValue)}}/>
+        <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Furniture', 'Clothes', 'Misc.']} defaultValue="Filter" onSelect={(itemIndex, itemValue) => {this.props.sort(this.props.inventoryitems, itemValue)}}/>
       </View>
   )
   }
@@ -32,15 +33,24 @@ export default class FilterSection extends Component {
 const styles = StyleSheet.create({
   container: {
     height: 10,
-    paddingTop: 40,
-    paddingLeft: 40,
+    paddingTop: 50,
     paddingBottom: 20,
+    flexDirection: 'row',
+  },
+  dropdown: {
+    width: '50%',
+
+  },
+  dropdownStyle: {
+    width: '50%',
   },
   dropdownDefaultText: {
-    fontSize: 18
+    fontSize: 18,
+    textAlign: 'center'
   },
   dropdownText: {
-    fontSize: 16
+    fontSize: 16,
+    textAlign: 'center'
   }
   
 });
