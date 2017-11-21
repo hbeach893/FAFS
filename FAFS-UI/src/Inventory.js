@@ -24,6 +24,7 @@ import {
   state => ({
     inventoryitems: state.inventoryStatus.inventoryitems,
     loading: state.inventoryStatus.loading,
+    filteredItems: state.filterInventory.filteredItems,
   }),
   dispatch => ({
     refresh: () => dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true}),
@@ -54,7 +55,8 @@ export default class Inventory extends Component {
 
   // Untill here
   render() {
-    const { inventoryitems, loading, refresh } = this.props;
+    const { inventoryitems, loading, refresh, filteredItems } = this.props;
+    var inventory = filteredItems.length > 0 ? filteredItems : inventoryitems;
 
 
     return (
@@ -72,7 +74,7 @@ export default class Inventory extends Component {
                 />
               }
         >
-          {inventoryitems.map((item, index) => <ItemDisplay
+          {inventory.map((item, index) => <ItemDisplay
             item={item}
             onOpen={this.openItem}
             key={index}

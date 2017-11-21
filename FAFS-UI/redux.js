@@ -19,7 +19,6 @@ export const apiMiddleware = store => next => action => {
         .then(response => response.json())
         .then(data => next({
           type: 'GET_INVENTORY_DATA_RECEIVED',
-          sortKey: 'A-Z',
           data,
 
         }))
@@ -49,11 +48,11 @@ export const apiMiddleware = store => next => action => {
            if (response.ok){
              return response._bodyInit;
            }
-         }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA', sortKey: 'A-Z'}));
+         }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA' }));
   }
 };
 
-const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: 'A-Z' }, action) => {
+const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: 'A-Z'}, action) => {
   switch (action.type) {
 
     case 'GET_INVENTORY_DATA_LOADING':
@@ -62,17 +61,10 @@ const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: '
         loading: true,              // but change loading to true
       };
     case 'GET_INVENTORY_DATA_RECEIVED':
-      var sortedInventoryItems = sortByKey(action.data.inventoryitems, 'A-Z');
       return {
         loading: false,             // set loading to false
-        inventoryitems: sortedInventoryItems, // update inventoryitems array with reponse data
+        inventoryitems: action.data.inventoryitems, // update inventoryitems array with reponse data
       };
-    case 'SORT_BY_SORT_KEY':
-      var sortedInventoryItems = sortByKey(action.inventoryitems, action.sortKey);
-      return {
-        ...state,
-        inventoryitems: sortedInventoryItems,
-      }
     case 'GET_INVENTORY_DATA_ERROR':
       return state;
     default:
@@ -80,7 +72,28 @@ const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: '
     }
 };
 
-
+const filterInventory = (state = { inventoryitems: [], filteredItems: [], filterKey: '', sortKey: ''}, action) => {
+  switch(action.type) {
+    case 'FILTER_BY_FILTER_KEY':
+      var filteredInventoryItems = filterByKey(action.inventoryitems, action.filterKey);
+      var sortedInventoryItems = sortByKey(filteredInventoryItems, state.sortKey);
+      return {
+        ...state,
+        filterKey: action.filterKey,
+        filteredItems: sortedInventoryItems,
+      }
+    case 'SORT_BY_SORT_KEY':
+      var sortedInventoryItems = sortByKey(action.inventoryitems, action.sortKey);
+      var filteredInventoryItems = filterByKey(sortedInventoryItems, state.filterKey);
+      return {
+        ...state,
+        sortKey: action.sortKey,
+        filteredItems: filteredInventoryItems,
+      }
+    default:
+      return state 
+  } 
+}
 
 const compareNameAtoZ = (a,b) => {
   if (a.title < b.title)
@@ -140,6 +153,20 @@ const sortByKey = (myArray, sortKey) => {
   }
 }
 
+const filterByKey = (myArray, filterKey) => {
+  if (filterKey == 'All') {
+    return myArray.slice();
+  }
+  else if (filterKey != "") {
+    let filteredWords = myArray.slice().filter(item => item.type.indexOf(filterKey) != -1);
+    return filteredWords; 
+  }
+  else {
+    return myArray.slice();
+  }
+}
+
 export const reducers = combineReducers({
-  inventoryStatus
+  inventoryStatus,
+  filterInventory
 });
