@@ -31,6 +31,6 @@ export default class InventoryPageContainer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,         // start below status bar
+    paddingTop: 30,         // start below status bar
   },
 });
