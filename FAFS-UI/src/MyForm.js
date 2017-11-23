@@ -2,8 +2,14 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import moment from 'moment';
+import Multiselect from 'react-widgets/lib/Multiselect';
 
+
+import MyMultiselect from './MyMultiselect';
 import MyTextInput from './MyTextInput';
+import MyPicker from './MyPicker';
+
+//import 'react-widgets/dist/css/react-widgets.css'
 
 const validate = values => {
   const errors = {}
@@ -60,6 +66,13 @@ function MyForm(props) {
         name={'email'}
         component={MyTextInput}
         placeholder={'Your email'}
+      />
+
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Choose tags:</Text>
+        <Field
+          name={'itemTags'}
+          component={MyMultiselect}
+          data={['animal', 'vegetable', 'mineral']}
       />
 
       <TouchableOpacity onPress={props.handleSubmit}>
