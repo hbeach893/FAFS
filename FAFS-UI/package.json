@@ -29,6 +29,7 @@
     "react-dom": "^16.1.1",
     "react-native": "^0.48.4",
     "react-native-multi-select": "^0.1.1",
+    "react-native-multiple-select": "^0.3.0",
     "react-redux": "^5.0.6",
     "react-widgets": "^4.1.1",
     "redux": "^3.7.2"

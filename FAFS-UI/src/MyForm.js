@@ -5,7 +5,8 @@ import moment from 'moment';
 import Multiselect from 'react-widgets/lib/Multiselect';
 
 
-import MyMultiselect from './MyMultiselect';
+import MyMultiselectAttempt from './MyMultiselectAttempt';
+//import MyMultiselect from './MyMultiselect'
 import MyTextInput from './MyTextInput';
 import MyPicker from './MyPicker';
 
@@ -68,10 +69,11 @@ function MyForm(props) {
         placeholder={'Your email'}
       />
 
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Choose tags:</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20}}>Choose tags:</Text>
         <Field
           name={'itemTags'}
-          component={MyMultiselect}
+          style = {{backgroundColor: '#FFB6C1',}}
+          component={MyMultiselectAttempt}
           data={['animal', 'vegetable', 'mineral']}
       />
 
