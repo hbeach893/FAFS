@@ -33,7 +33,7 @@ export default class UploadPageContainer extends Component {
     const { refresh } = this.props;
     return (
       <View style={styles.container}>
-        <Button onPress={() => {Alert.alert('hello!');this.props.navigator.pop()}}
+        <Button onPress={() => {this.props.navigator.pop()}}
           title="Back to Main"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"

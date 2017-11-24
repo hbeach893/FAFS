@@ -168,5 +168,6 @@ const filterByKey = (myArray, filterKey) => {
 
 export const reducers = combineReducers({
   inventoryStatus,
-  filterInventory
+  filterInventory,
+  form
 });
