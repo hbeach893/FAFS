@@ -19,7 +19,8 @@ export const apiMiddleware = store => next => action => {
         .then(response => response.json())
         .then(data => next({
           type: 'GET_INVENTORY_DATA_RECEIVED',
-          data
+          data,
+
         }))
         .catch(error => next({
           type: 'GET_INVENTORY_DATA_ERROR',
@@ -47,12 +48,13 @@ export const apiMiddleware = store => next => action => {
            if (response.ok){
              return response._bodyInit;
            }
-         })
+         }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA' }));
   }
 };
 
-const inventoryStatus = (state = { inventoryitems: [], loading: true }, action) => {
+const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: 'A-Z'}, action) => {
   switch (action.type) {
+
     case 'GET_INVENTORY_DATA_LOADING':
       return {
         ...state,                   // keep the existing state,
@@ -70,9 +72,102 @@ const inventoryStatus = (state = { inventoryitems: [], loading: true }, action) 
     }
 };
 
+const filterInventory = (state = { inventoryitems: [], filteredItems: [], filterKey: '', sortKey: ''}, action) => {
+  switch(action.type) {
+    case 'FILTER_BY_FILTER_KEY':
+      var filteredInventoryItems = filterByKey(action.inventoryitems, action.filterKey);
+      var sortedInventoryItems = sortByKey(filteredInventoryItems, state.sortKey);
+      return {
+        ...state,
+        filterKey: action.filterKey,
+        filteredItems: sortedInventoryItems,
+      }
+    case 'SORT_BY_SORT_KEY':
+      var sortedInventoryItems = sortByKey(action.inventoryitems, action.sortKey);
+      var filteredInventoryItems = filterByKey(sortedInventoryItems, state.filterKey);
+      return {
+        ...state,
+        sortKey: action.sortKey,
+        filteredItems: filteredInventoryItems,
+      }
+    default:
+      return state 
+  } 
+}
 
+const compareNameAtoZ = (a,b) => {
+  if (a.title < b.title)
+    return -1;
+  if (a.title > b.title)
+    return 1;
+  return 0;
+}
+
+const compareNameZtoA = (a,b) => {
+  if (a.title > b.title)
+    return -1;
+  if (a.title < b.title)
+    return 1;
+  return 0;
+}
+
+const comparePriceLoToHi= (a,b) => {
+  var a = a.price.replace("$", "");
+  var b = b.price.replace("$", "");
+  a = parseFloat(a);
+  b = parseFloat(b);
+  if (a < b)
+    return -1;
+  if (a > b)
+    return 1;
+  return 0;
+}
+
+const comparePriceHiToLo= (a,b) => {
+  var a = a.price.replace("$", "");
+  var b = b.price.replace("$", "");
+  a = parseFloat(a);
+  b = parseFloat(b);
+  if (a > b)
+    return -1;
+  if (a < b)
+    return 1;
+  return 0;
+}
+
+const sortByKey = (myArray, sortKey) => {
+  if (sortKey == 'A-Z') {
+    return myArray.slice().sort(compareNameAtoZ);
+  } 
+  if (sortKey == 'Z-A') {
+    return myArray.slice().sort(compareNameZtoA);
+  } 
+  if (sortKey == 'Price: Low to High') {
+    return myArray.slice().sort(comparePriceLoToHi);
+  } 
+  if (sortKey == 'Price: High to Low') {
+    return myArray.slice().sort(comparePriceHiToLo);
+  } 
+  else {
+    return myArray.slice();
+  }
+}
+
+const filterByKey = (myArray, filterKey) => {
+  if (filterKey == 'All') {
+    return myArray.slice();
+  }
+  else if (filterKey != "") {
+    let filteredWords = myArray.slice().filter(item => item.type.indexOf(filterKey) != -1);
+    return filteredWords; 
+  }
+  else {
+    return myArray.slice();
+  }
+}
 
 export const reducers = combineReducers({
   inventoryStatus,
+  filterInventory,
   form
 });

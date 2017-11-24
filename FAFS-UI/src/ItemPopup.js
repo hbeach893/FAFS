@@ -25,14 +25,6 @@ export default class ItemPopup extends Component {
     // Movie object that has title, genre, poster, days and times
     item: PropTypes.object,
     // Index of chosen day
-    chosenDay: PropTypes.number,
-    // Index of chosem show time
-    chosenTime: PropTypes.number,
-    // Gets called when user chooses day
-    onChooseDay: PropTypes.func,
-    // Gets called when user chooses time
-    onChooseTime: PropTypes.func,
-    // Gets called when user books their ticket
     onBook: PropTypes.func,
     // Gets called when popup closed
     onClose: PropTypes.func,
@@ -219,7 +211,7 @@ export default class ItemPopup extends Component {
       onBook
     } = this.props;
     // Pull out movie data
-    const { title, image, desc, price } = item || {};
+    const { title, image, desc, price, ownerEmail } = item || {};
     // Render nothing if not visible
     if (!this.state.visible) {
       return null;
@@ -253,6 +245,7 @@ export default class ItemPopup extends Component {
               {/* Title and genre */}
               <View style={[styles.movieInfo, this.getStyles().movieInfo]}>
                 <Text style={[styles.title, this.getStyles().title]}>{title}</Text>
+                <Text style={styles.desc}>{desc}</Text>
                 <Text style={styles.price}>{price}</Text>
               </View>
 
@@ -278,7 +271,7 @@ export default class ItemPopup extends Component {
               style={styles.buttonContainer}
               onPress={onBook}
             >
-              <Text style={styles.button}>Buy</Text>
+              <Text style={styles.button}>Contact {ownerEmail}</Text>
             </TouchableHighlight>
           </View>
 
@@ -317,6 +310,10 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,                            // take up all available space
+  },
+  desc: {
+    paddingTop: 10,
+    paddingBottom: 10
   },
   image: {
     borderRadius: 10,                   // rounded corners

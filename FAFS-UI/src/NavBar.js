@@ -15,7 +15,7 @@ export default class NavBar extends Component {
         <Button onPress={() => this.props.navigator.push({name: 'upload'})}
           title="Upload Item"
           color="#841584"
-          accessibilityLabel="Learn more about this purple button"
+          accessibilityLabel="Upload an item"
         />
       </View>
 
@@ -25,7 +25,7 @@ export default class NavBar extends Component {
 
 
 const styles = StyleSheet.create({
-  container: {
-    height: 50,
-  },
+  // container: {
+  //   height: 30,
+  // },
 });
