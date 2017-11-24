@@ -1,20 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Multiselect from 'react-widgets/lib/Multiselect';
-
+//import Multiselect from 'react-widgets/lib/Multiselect';
+//var Multiselect = require('react-bootstrap-multiselect');
+import Multiselect from 'react-bootstrap-multiselect';
 export default function MyMultiselect(props) {
   const { input, ...inputProps } = props;
 
   return (
     <View style={[styles.inputContainer]}>
       <Multiselect
-        {...inputProps}
-        onBlur={input.onBlur}
-        value={input.value || []} // requires value to be an array
-        onChange={input.onChange}
-        style={styles.input}
-        //valueField={valueField}
-        //textField={textField}
+        // {...inputProps}
+        // onBlur={input.onBlur}
+        // value={input.value || []} // requires value to be an array
+        // onChange={input.onChange}
+        // style={styles.input}
+        // //valueField={valueField}
+        // //textField={textField}
       />
     </View>
   );
