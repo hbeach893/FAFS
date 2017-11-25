@@ -2,17 +2,11 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { ScrollView, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import moment from 'moment';
-import Multiselect from 'react-widgets/lib/Multiselect';
-
 
 import MyDropdown from './MyDropdown';
 
-import MyMultiselectAttempt from './MyMultiselectAttempt';
-//import MyMultiselect from './MyMultiselect'
 import MyTextInput from './MyTextInput';
-import MyPicker from './MyPicker';
-import ModalDropdown from 'react-native-modal-dropdown';
-//import 'react-widgets/dist/css/react-widgets.css'
+
 
 const validate = values => {
   const errors = {}
