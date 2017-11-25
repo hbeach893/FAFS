@@ -23,7 +23,7 @@ const addItem = (item) => {
   itemObj.price = item.itemPrice;
   itemObj.ownerEmail = item.email;
   itemObj.datePosted = new Date();
-  itemObj.type = [];
+  itemObj.type = [item.type];
   store.dispatch({type:'ADD_ITEM', newitem: itemObj});
 
 }
@@ -48,5 +48,6 @@ export default class UploadPageContainer extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,         // start below status bar
+    flex: 1
   },
 });

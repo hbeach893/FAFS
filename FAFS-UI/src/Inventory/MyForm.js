@@ -1,9 +1,18 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import moment from 'moment';
+import Multiselect from 'react-widgets/lib/Multiselect';
 
+
+import MyDropdown from './MyDropdown';
+
+import MyMultiselectAttempt from './MyMultiselectAttempt';
+//import MyMultiselect from './MyMultiselect'
 import MyTextInput from './MyTextInput';
+import MyPicker from './MyPicker';
+import ModalDropdown from 'react-native-modal-dropdown';
+//import 'react-widgets/dist/css/react-widgets.css'
 
 const validate = values => {
   const errors = {}
@@ -24,6 +33,9 @@ const validate = values => {
     errors.email = 'Email is required.'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
+  }
+  if(values.type == 'Select' || values.type == undefined) {
+    errors.type = 'Type of Item is Required'
   }
   return errors
 }
@@ -61,7 +73,26 @@ function MyForm(props) {
         component={MyTextInput}
         placeholder={'Your email'}
       />
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Type of Item</Text>
+      <Field
+        name={'type'}
+        component={MyDropdown}
+        placeholder={'Type of item'}
+      />
+      {/*
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Type of Item</Text>
+      <ModalDropdown style={styles.dropdown} name="type" dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Furniture', 'Clothes', 'Appliances', 'Shoes', 'Accessory']} defaultValue="Filter"
+        />
+      */}
 
+      {/*
+      <Text style={{ fontWeight: 'bold', marginTop: 20, marginBottom: 20}}>Choose tags:</Text>
+        <Field
+          name={'itemTags'}
+          component={MyMultiselectAttempt}
+          data={['animal', 'vegetable', 'mineral']}
+      />
+      */}
       <TouchableOpacity onPress={props.handleSubmit}>
         <Text style={styles.formSubmit}>Submit!</Text>
       </TouchableOpacity>
@@ -78,7 +109,7 @@ export default reduxForm({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 45
+    padding: 45,
   },
   formSubmit: {
     alignSelf: 'center',
@@ -86,5 +117,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 25,
     padding: 5
+  },
+  //   dropdown: {
+  //   width: '30%',
+
+  // },
+  dropdownStyle: {
+    
+  },
+  dropdownDefaultText: {
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  dropdownText: {
+    fontSize: 16,
+    textAlign: 'center'
   }
 });

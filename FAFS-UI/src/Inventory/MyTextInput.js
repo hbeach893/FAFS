@@ -3,9 +3,6 @@ import { TextInput, View, Text, StyleSheet, Alert } from 'react-native';
 
 
 
-/**
- * to be wrapped with redux-form Field component
- */
 export default function MyTextInput(props) {
   const { input, meta, ...inputProps } = props;
 

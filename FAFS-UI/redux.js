@@ -52,7 +52,7 @@ export const apiMiddleware = store => next => action => {
   }
 };
 
-const inventoryStatus = (state = { inventoryitems: [], loading: true, sortKey: 'A-Z'}, action) => {
+const inventoryStatus = (state = { inventoryitems: [], loading: true}, action) => {
   switch (action.type) {
 
     case 'GET_INVENTORY_DATA_LOADING':
