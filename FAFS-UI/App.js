@@ -8,15 +8,34 @@ import {
 import {
   Alert
 } from 'react-native';
-import InventoryPageContainer from './src/InventoryPageContainer';
-import UploadPageContainer from './src/UploadPageContainer';
+import StartupPageContainer from './src/StartupPageContainer';
+
+import InventoryPageContainer from './src/Inventory/InventoryPageContainer';
+import UploadPageContainer from './src/Inventory/UploadPageContainer';
+
+import RidesharePageContainer from './src/Rides/RidesharePageContainer';
+import UploadRiderContainer from './src/Rides/UploadRiderContainer';
+import UploadDriverContainer from './src/Rides/UploadDriverContainer';
+
 
 const RouteMapper = (route, navigator) => {
+  if (route.name === 'startup') {
+    return <StartupPageContainer navigator={navigator} />;
+  }
   if (route.name === 'inventory') {
     return <InventoryPageContainer navigator={navigator} />;
   }
   if (route.name === 'upload') {
     return <UploadPageContainer navigator={navigator}/>;
+  }
+  if (route.name === 'ride_inventory') {
+    return <RidesharePageContainer navigator={navigator} />;
+  }
+  if (route.name === 'upload_ride_rider') {
+    return <UploadRiderContainer navigator={navigator} />;
+  }
+  if (route.name === 'upload_ride_driver') {
+    return <UploadDriverContainer navigator={navigator} />;
   }
 };
 
@@ -33,7 +52,7 @@ export default class App extends Component {
       <Provider store={store}>
         <Navigator
           // Default to inventory route
-          initialRoute={{ name: 'inventory' }}
+          initialRoute={{ name: 'startup' }}
           // Use FloatFromBottom transition between screens
           configureScene={(route, routeStack) => Navigator.SceneConfigs.FloatFromBottom}
           // Pass a route mapper functions

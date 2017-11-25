@@ -17,6 +17,11 @@ export default class NavBar extends Component {
           color="#841584"
           accessibilityLabel="Upload an item"
         />
+        <Button onPress={() => this.props.navigator.push({name: 'startup'})}
+          title="Return to Main"
+          color="#841584"
+          accessibilityLabel="View Rideshare Page"
+        />
       </View>
 
     )

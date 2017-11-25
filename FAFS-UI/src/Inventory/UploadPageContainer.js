@@ -13,7 +13,7 @@ import {
   Alert,
   FormValidationMessage
 } from 'react-native';
-import {store} from '../App.js';
+import {store} from '../../App.js';
 
 const addItem = (item) => {
   const itemObj = {}
@@ -34,7 +34,7 @@ export default class UploadPageContainer extends Component {
     return (
       <View style={styles.container}>
         <Button onPress={() => {this.props.navigator.pop()}}
-          title="Back to Main"
+          title="Back to Available Inventory"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
