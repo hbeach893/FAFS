@@ -3,7 +3,8 @@ import React, {Component, PropTypes} from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Alert
 } from 'react-native';
 import { Select, SelectTextBox, Option, OptionList } from 'react-native-multi-select';
  
@@ -14,7 +15,9 @@ export default class MyMultiselectAttempt extends Component {
     types = [
         'Furniture',
         'Clothes',
-        'Rides'
+        'Rides',
+        'Appliances',
+        'Shoes'
     ];
  
     state = {
@@ -31,20 +34,24 @@ export default class MyMultiselectAttempt extends Component {
         this.setState({selectedItem: [...this.state.selectedItem, item]})
     };
  
-    removeItem = removedItem => {
-        this.setState({
-            selectedItem: this.state.selectedItem.filter(item => {
-                if (item._id !== removedItem._id)
-                    return item;
-            })
-        });
-    };
+    // removeItem = (removedItem) => {
+    //     this.setState({
+    //         selectedItem: this.state.selectedItem.filter(item => {
+    //             if (item._id !== removedItem._id)
+    //                 return item;
+    //         })
+    //     });
+    //     this.types.push(removedItem);
+    //     Alert.alert(JSON.stringify(removedItem));
+    // };
 
     removeOption = (option) => {
-        var index = types.indexOf(option);
+        var index = this.types.indexOf(option);
         if (index > -1) {
-            types.splice(index, 1);
+            this.types.splice(index, 1);
         }
+
+        this.setState({selectedItem: [...this.state.selectedItem, option]})
     }
  
     render() {
@@ -54,12 +61,15 @@ export default class MyMultiselectAttempt extends Component {
                     style={styles.selectTextBox}
                     selectedItem={this.state.selectedItem}
                     placeholder={"Choose tags"}
-                    onPressOut={(removedItem) => this.setState({
+                    onPressOut={(removedItem) => {this.setState({
                         selectedItem: this.state.selectedItem.filter(text => {
                             if (text !== removedItem)
                                 return text;
                         })
-                    })}
+                        
+                    })
+                    this.types.push(removedItem);
+                }}
                     onTextInputFocus={() => this.setState({displayOptionList: true})}
                     onTextInputLoosFocus={() => this.setState({displayOptionList: false})}
                     onSelectTextBoxChanged={event => this.updateText(event.nativeEvent.text)}
@@ -73,7 +83,7 @@ export default class MyMultiselectAttempt extends Component {
                     removeItem={item => this.removeItem(item)}>
                     
                     {this.types.map((city, index) => <Option
-                        onPress={(item) => {removeOption(item); this.setState({selectedItem: [...this.state.selectedItem, item]})}
+                        onPress={item => this.removeOption(item) }
                         styles={styles.option}
                         key={index}
                         value={{_id: Math.random()}}>
@@ -93,7 +103,8 @@ const styles = StyleSheet.create({
        
     },
     optionList: {
-         
+        flexDirection: 'row',   // arrange posters in rows
+        flexWrap: 'wrap',  
     },
     option: {
         

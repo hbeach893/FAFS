@@ -45,7 +45,7 @@ export default class OptionList extends Component {
         return (
             <View {...view} style={[styles.view, view.style, this.mayHide()]}>
                 <ScrollView {...scrollView} style={[styles.scrollView, scrollView.style]}
-                            keyboardShouldPersistTaps={true}>
+                            keyboardShouldPersistTaps="always">
                     {text.length > 0 ?
                         this.filter(children, items, text) : children}
                 </ScrollView>
