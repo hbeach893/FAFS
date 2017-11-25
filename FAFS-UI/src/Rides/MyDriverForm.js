@@ -17,6 +17,9 @@ const validate = values => {
     errors.price = 'Price is required.'
   } else if (!/^[1-9]\d*(?:\.\d{0,2})?$/i.test(values.price) && (values.price != '0')) {
     errors.price = 'Item price must be a valid currency. If free, please put 0.' }
+  if(!values.date) {
+    errors.date = 'Departure date is required.'
+  }
   if(!values.time) {
     errors.time = 'Departure time is required.'
   }
@@ -47,6 +50,12 @@ function MyForm(props) {
         name={'dest'}
         component={MyTextInput}
         placeholder={'Ride destination'}
+      />
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Departure date (mm/dd/yy)</Text>
+      <Field
+        name={'date'}
+        component={MyTextInput}
+        placeholder={'Preferred departure date'}
       />
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Departure time</Text>
       <Field

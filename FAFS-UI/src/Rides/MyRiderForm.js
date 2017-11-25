@@ -13,6 +13,9 @@ const validate = values => {
   if(!values.dest) {
     errors.dest = 'Destination is required.'
   }
+  if(!values.date) {
+    errors.date = 'Departure date is required.'
+  }
   if(!values.time) {
     errors.time = 'Departure time is required.'
   }
@@ -43,6 +46,12 @@ function MyForm(props) {
         name={'dest'}
         component={MyTextInput}
         placeholder={'Preferred destination of ride'}
+      />
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Departure date (mm/dd/yy)</Text>
+      <Field
+        name={'date'}
+        component={MyTextInput}
+        placeholder={'Preferred departure date'}
       />
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Departure time</Text>
       <Field

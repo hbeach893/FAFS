@@ -47,6 +47,7 @@ export default class UploadDriverContainer extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingTop: 20,         // start below status bar
   },
 });

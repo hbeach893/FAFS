@@ -38,7 +38,7 @@ export default class UploadRiderContainer extends Component {
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
-        <MyForm onSubmit={(item) =>  addItem(item)}/>
+        <MyForm onSubmit={(item) => {Alert.alert(JSON.stringify(item));addItem(item)} }/>
       </View>
     )
   }
@@ -47,6 +47,7 @@ export default class UploadRiderContainer extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingTop: 20,         // start below status bar
   },
 });
