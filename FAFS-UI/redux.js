@@ -44,10 +44,27 @@ export const apiMiddleware = store => next => action => {
           error
         }));
       break;
+   
+    case 'GET_DRIVER_DATA':
+      // Dispatch GET_DRIVER_DATA_LOADING to update loading state
+      store.dispatch({type: 'GET_DRIVER_DATA_LOADING', drivers: [], loadingDrivers: true});
+      // Make API call and dispatch appropriate actions when done
+      fetch(`${API}/driverequests`)
+        .then(response => response.json())
+        .then(data => next({
+          type: 'GET_DRIVER_DATA_RECEIVED',
+          data,
+
+        }))
+        .catch(error => next({
+          type: 'GET_DRIVER_DATA_ERROR',
+          error
+        }));
+      break;
 
     case 'ADD_ITEM':
 
-      const request = new Request(
+      const inventoryRequest = new Request(
         `${API}/inventoryitems` ,
            {
              method:'POST',
@@ -57,12 +74,51 @@ export const apiMiddleware = store => next => action => {
               'Content-Type': 'application/json',
             }}
          )
-         fetch(request)
+         fetch(inventoryRequest)
          .then((response)=>{
            if (response.ok){
              return response._bodyInit;
            }
          }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA' }));
+    
+    case 'ADD_RIDE_REQUEST':
+
+      const rideRequest = new Request(
+        `${API}/riderequests` ,
+           {
+             method:'POST',
+             body: JSON.stringify(action.newRideRequest),
+             headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            }}
+         )
+         fetch(rideRequest)
+         .then((response)=>{
+           if (response.ok){
+             return response._bodyInit;
+           }
+         }).then(() => store.dispatch({type: 'GET_RIDER_DATA' }));
+
+    case 'ADD_DRIVE_REQUEST':
+
+      const driveRequest = new Request(
+        `${API}/driverequests` ,
+           {
+             method:'POST',
+             body: JSON.stringify(action.newDriveRequest),
+             headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            }}
+         )
+         fetch(driveRequest)
+         .then((response)=>{
+           if (response.ok){
+             Alert.alert(response._bodyInit);
+             return response._bodyInit;
+           }
+         }).then(() => store.dispatch({type: 'GET_DRIVER_DATA' }));
 
     default:
       break;
@@ -108,6 +164,27 @@ const riderStatus = (state = { riders: [], loadingRiders: true}, action) => {
         riders: action.data.riderequests, // update riders array with reponse data
       };
     case 'GET_RIDER_DATA_ERROR':
+      return state;
+    default:
+      return state;
+    }
+};
+
+const driverStatus = (state = { drivers: [], loadingDrivers: true}, action) => {
+  switch (action.type) {
+
+    case 'GET_DRIVER_DATA_LOADING':
+
+      return {
+        ...state,                   // keep the existing state,
+        loadingDrivers: true,              // but change loading to true
+      };
+    case 'GET_DRIVER_DATA_RECEIVED':
+      return {
+        loadingDrivers: false,             // set loading to false
+        drivers: action.data.driverequests, // update drivers array with reponse data
+      };
+    case 'GET_DRIVER_DATA_ERROR':
       return state;
     default:
       return state;
@@ -212,5 +289,6 @@ export const reducers = combineReducers({
   inventoryStatus,
   filterInventory,
   riderStatus,
+  driverStatus,
   form
 });

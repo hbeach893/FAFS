@@ -3,7 +3,6 @@ import { reduxForm, Field } from 'redux-form';
 import { ScrollView, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import moment from 'moment';
 
-import MyDropdown from './MyDropdown';
 
 import MyTextInput from './MyTextInput';
 

@@ -2,9 +2,9 @@ import express, { Router } from 'express';
 // Import index action from inventoryItems controller
 import { index, additem } from './controllers/inventoryItems';
 
-import { indexRideRequests } from './controllers/rideRequests';
+import { indexRideRequests, addRideRequest } from './controllers/rideRequests';
 
-import { indexDriveRequests } from './controllers/driveRequests';
+import { indexDriveRequests, addDriveRequest } from './controllers/driveRequests';
 // Initialize the router
 const router = Router();
 
@@ -14,10 +14,12 @@ router.route('/inventoryitems')
   .post(additem);
 
 router.route('/riderequests')
-  .get(indexRideRequests);
+  .get(indexRideRequests)
+  .post(addRideRequest);
 
 router.route('/driverequests')
-  .get(indexDriveRequests);
+  .get(indexDriveRequests)
+  .post(addDriveRequest);
 
 // router.route('/additem').post('additem');
 

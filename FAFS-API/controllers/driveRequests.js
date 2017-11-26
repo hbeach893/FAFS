@@ -9,3 +9,12 @@ export const indexDriveRequests = (req, res, next) => {
     { driverequests: driveRequests}
   ));
 };
+
+export const addDriveRequest = function(req, res) {
+  const driveRequest = new DriveRequest(req.body);
+    driveRequest.save((err, item) => {
+    if (err) return next(err);
+      res.status(201);
+      res.json(item);
+    });
+};

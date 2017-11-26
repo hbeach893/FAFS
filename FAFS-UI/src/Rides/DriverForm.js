@@ -36,7 +36,7 @@ const validate = values => {
   return errors
 }
 
-function MyForm(props) {
+function DriverForm(props) {
   return (
     <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Starting location</Text>
@@ -93,7 +93,7 @@ function MyForm(props) {
 export default reduxForm({
   form: 'uploadItem',
   validate
-})(MyForm);
+})(DriverForm);
 
 
 const styles = StyleSheet.create({
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
     marginTop: 25,
-    padding: 5
+    padding: 5,
+    paddingBottom: 100,
   }
 });

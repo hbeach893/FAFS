@@ -1,43 +1,47 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar';
-import MyForm from './MyDriverForm';
+import DriverForm from './DriverForm';
 import { connect } from 'react-redux';
 import {
   View,
   StyleSheet,
   Text,
-  Button,
-  FormLabel,
-  FormInput,
-  Alert,
-  FormValidationMessage
+  Button
 } from 'react-native';
-import {store} from '../../App.js';
 
-const addItem = (item) => {
-  const itemObj = {}
-  itemObj.title = item.itemName;
-  itemObj.desc = item.itemDescription;
-  itemObj.image = item.itemImage;
-  itemObj.price = item.itemPrice;
-  itemObj.ownerEmail = item.email;
-  itemObj.datePosted = new Date();
-  itemObj.type = [];
-  store.dispatch({type:'ADD_ITEM', newitem: itemObj});
+@connect(
+  state => ({
 
-}
+  }),
+  dispatch => ({
+    addDriveRequest: (driveObj) => dispatch({type: 'ADD_DRIVE_REQUEST', newDriveRequest: driveObj}),
+  }),
+)
+
 
 export default class UploadDriverContainer extends Component {
   render() {
-    const { refresh } = this.props;
+
+  const addDriveRequest = (drive) => {
+    const driveObj = {}
+    driveObj.start = drive.start;
+    driveObj.dest = drive.dest;
+    driveObj.price = drive.price;
+    driveObj.date = drive.date;
+    driveObj.time = drive.time;
+    driveObj.numSeats = drive.numSeats;
+    driveObj.riderEmail = drive.riderEmail
+    driveObj.datePosted = new Date();
+    this.props.addDriveRequest(driveObj);
+
+  }
     return (
       <View style={styles.container}>
         <Button onPress={() => {this.props.navigator.pop()}}
           title="Back to Available Rides"
           color="#841584"
-          accessibilityLabel="Learn more about this purple button"
+          accessibilityLabel="Upload a drive request"
         />
-        <MyForm onSubmit={(item) =>  addItem(item)}/>
+        <DriverForm onSubmit={(driveRequest) =>  addDriveRequest(driveRequest)}/>
       </View>
     )
   }

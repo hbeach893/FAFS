@@ -9,3 +9,12 @@ export const indexRideRequests = (req, res, next) => {
     { riderequests: rideRequests}
   ));
 };
+
+export const addRideRequest = function(req, res) {
+  const rideRequest = new RideRequest(req.body);
+    rideRequest.save((err, item) => {
+    if (err) return next(err);
+      res.status(201);
+      res.json(item);
+    });
+};
