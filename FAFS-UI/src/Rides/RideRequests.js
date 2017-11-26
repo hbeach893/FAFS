@@ -6,7 +6,6 @@ import {
   View,
   Alert
 } from 'react-native';
-//import { inventory } from './data';
 import ItemDisplay from './ItemDisplay';
 import ItemPopup from './ItemPopup';
 import { connect } from 'react-redux';
@@ -22,18 +21,17 @@ import {
 
 @connect(
   state => ({
-    inventoryitems: state.inventoryStatus.inventoryitems,
-    loading: state.inventoryStatus.loading,
-    filteredItems: state.filterInventory.filteredItems,
+    riders: state.riderStatus.riders,
+    loading: state.riderStatus.loadingRiders,
   }),
   dispatch => ({
-    refresh: () => dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true}),
+    refresh: () => dispatch({type: 'GET_RIDER_DATA', riders: [], loadingRiders:true}),
   }),
 )
 
 
 
-export default class Inventory extends Component {
+export default class RideRequests extends Component {
   // Add starting here
   state = {
     popupIsOpen: false,
@@ -55,13 +53,11 @@ export default class Inventory extends Component {
 
   // Untill here
   render() {
-    const { inventoryitems, loading, refresh, filteredItems } = this.props;
-    var inventory = filteredItems.length > 0 ? filteredItems : inventoryitems;
-
-
+    const { riders, loading, refresh } = this.props;
+   
     return (
       <View style={styles.container}>
-      { inventoryitems ?
+      { riders ?
         <ScrollView
           contentContainerStyle={styles.scrollContent}
 		  // Hide all scroll indicators
@@ -74,7 +70,7 @@ export default class Inventory extends Component {
                 />
               }
         >
-          {inventory.map((item, index) => <ItemDisplay
+          {riders.map((item, index) => <ItemDisplay
             item={item}
             onOpen={this.openItem}
             key={index}

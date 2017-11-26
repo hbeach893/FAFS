@@ -104,7 +104,7 @@ const inventoryItems = [
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/inventoryitems');
+mongoose.connect('mongodb://localhost/fafs');
 
 // Go through each movie
 inventoryItems.map(data => {

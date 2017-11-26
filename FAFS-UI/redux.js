@@ -27,8 +27,22 @@ export const apiMiddleware = store => next => action => {
           error
         }));
       break;
-    // Do nothing if the action does not interest us
-    default:
+
+    case 'GET_RIDER_DATA':
+      // Dispatch GET_RIDER_DATA_LOADING to update loading state
+      store.dispatch({type: 'GET_RIDER_DATA_LOADING', riders: [], loadingRiders: true});
+      // Make API call and dispatch appropriate actions when done
+      fetch(`${API}/riderequests`)
+        .then(response => response.json())
+        .then(data => next({
+          type: 'GET_RIDER_DATA_RECEIVED',
+          data,
+
+        }))
+        .catch(error => next({
+          type: 'GET_RIDER_DATA_ERROR',
+          error
+        }));
       break;
 
     case 'ADD_ITEM':
@@ -49,7 +63,14 @@ export const apiMiddleware = store => next => action => {
              return response._bodyInit;
            }
          }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA' }));
+
+    default:
+      break;
+
   }
+    
+
+
 };
 
 const inventoryStatus = (state = { inventoryitems: [], loading: true}, action) => {
@@ -66,6 +87,26 @@ const inventoryStatus = (state = { inventoryitems: [], loading: true}, action) =
         inventoryitems: action.data.inventoryitems, // update inventoryitems array with reponse data
       };
     case 'GET_INVENTORY_DATA_ERROR':
+      return state;
+    default:
+      return state;
+    }
+};
+
+const riderStatus = (state = { riders: [], loadingRiders: true}, action) => {
+  switch (action.type) {
+
+    case 'GET_RIDER_DATA_LOADING':
+      return {
+        ...state,                   // keep the existing state,
+        loadingRiders: true,              // but change loading to true
+      };
+    case 'GET_RIDER_DATA_RECEIVED':
+      return {
+        loadingRiders: false,             // set loading to false
+        riders: action.data.riders, // update riders array with reponse data
+      };
+    case 'GET_RIDER_DATA_ERROR':
       return state;
     default:
       return state;
@@ -169,5 +210,6 @@ const filterByKey = (myArray, filterKey) => {
 export const reducers = combineReducers({
   inventoryStatus,
   filterInventory,
+  riderStatus,
   form
 });

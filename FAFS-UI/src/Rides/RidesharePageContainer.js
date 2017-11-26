@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Inventory from './Inventory';
+import RideRequests from './RideRequests';
 import NavBar from './NavBar';
-import FilterSection from './FilterSection';
+
 
 import {
   View,
@@ -19,8 +19,7 @@ export default class RidesharePageContainer extends Component {
     return (
       <View style={styles.container}>
         <NavBar navigator={this.props.navigator}/>
-        <FilterSection/>
-        <Inventory/>
+        <RideRequests/>
 
 
       </View>

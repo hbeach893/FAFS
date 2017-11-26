@@ -7,9 +7,8 @@ const cors = require('cors');
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/inventoryitems');
-mongoose.connect('mongodb://localhost/riderequests');
-mongoose.connect('mongodb://localhost/driverequests');
+mongoose.connect('mongodb://localhost/fafs');
+
 
 // Initialize http server
 const app = express();

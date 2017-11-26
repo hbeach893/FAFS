@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Inventory from './Inventory';
 import NavBar from './NavBar';
 import MyForm from './MyDriverForm';
 import { connect } from 'react-redux';

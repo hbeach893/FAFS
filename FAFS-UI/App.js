@@ -42,9 +42,8 @@ const RouteMapper = (route, navigator) => {
 // Create Redux store
 export const store = createStore(reducers, {}, applyMiddleware(apiMiddleware));
 
-
 store.dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true});
-
+//store.dispatch({type: 'GET_RIDER_DATA', riders: [], loadingRiders:true});
 
 export default class App extends Component {
   render() {
