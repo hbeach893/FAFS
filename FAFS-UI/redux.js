@@ -97,6 +97,7 @@ const riderStatus = (state = { riders: [], loadingRiders: true}, action) => {
   switch (action.type) {
 
     case 'GET_RIDER_DATA_LOADING':
+
       return {
         ...state,                   // keep the existing state,
         loadingRiders: true,              // but change loading to true
@@ -104,7 +105,7 @@ const riderStatus = (state = { riders: [], loadingRiders: true}, action) => {
     case 'GET_RIDER_DATA_RECEIVED':
       return {
         loadingRiders: false,             // set loading to false
-        riders: action.data.riders, // update riders array with reponse data
+        riders: action.data.riderequests, // update riders array with reponse data
       };
     case 'GET_RIDER_DATA_ERROR':
       return state;

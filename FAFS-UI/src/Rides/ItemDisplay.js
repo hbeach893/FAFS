@@ -23,14 +23,12 @@ export default class ItemDisplay extends Component {
     onOpen: PropTypes.func.isRequired,
   }
   render() {
-    const { item, item: { title, price, image }, onOpen } = this.props;
+    const { item, item: { start, dest, date, time, numSeats, riderEmail }, onOpen } = this.props;
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(item)}>
-        <View style={styles.imageContainer}>
-          <Image source={{ uri: image }} style={styles.image} />
-        </View>
-        <Text style={styles.title} numberOfLines={1}>{title}</Text>
-        <Text style={styles.price} numberOfLines={1}>{price}</Text>
+        <Text style={styles.title} numberOfLines={1}>{start} to {dest}</Text>
+        <Text style={styles.title} numberOfLines={1}>{date}</Text>
+        <Text style={styles.title} numberOfLines={1}>{time}</Text>
       </TouchableOpacity>
     );
   }

@@ -53,7 +53,7 @@ export default class RideRequests extends Component {
 
   // Untill here
   render() {
-    const { riders, loading, refresh } = this.props;
+   const { riders, loading, refresh } = this.props;
    
     return (
       <View style={styles.container}>
@@ -82,6 +82,7 @@ export default class RideRequests extends Component {
               size="large"
             />
           }
+          <Text>{ riders.length }</Text>
         <ItemPopup
           item={this.state.item}
           isOpen={this.state.popupIsOpen}
