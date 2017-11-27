@@ -13,24 +13,34 @@ import {
   Alert,
   FormValidationMessage
 } from 'react-native';
-import {store} from '../../App.js';
 
-const addItem = (item) => {
-  const itemObj = {}
-  itemObj.title = item.itemName;
-  itemObj.desc = item.itemDescription;
-  itemObj.image = item.itemImage;
-  itemObj.price = item.itemPrice;
-  itemObj.ownerEmail = item.email;
-  itemObj.datePosted = new Date();
-  itemObj.type = [item.type];
-  store.dispatch({type:'ADD_ITEM', newitem: itemObj});
 
-}
+
+
+@connect(
+  state => ({
+  }),
+  dispatch => ({
+    addItem: (itemObj) => dispatch({type: 'ADD_ITEM', newitem: itemObj}),
+  }),
+)
 
 export default class UploadPageContainer extends Component {
   render() {
     const { refresh } = this.props;
+
+    const addItem = (item) => {
+      const itemObj = {}
+      itemObj.title = item.itemName;
+      itemObj.desc = item.itemDescription;
+      itemObj.image = item.itemImage;
+      itemObj.price = item.itemPrice;
+      itemObj.ownerEmail = item.email;
+      itemObj.datePosted = new Date();
+      itemObj.type = [item.type];
+      this.props.addItem(itemObj);
+
+    }
     return (
       <View style={styles.container}>
         <Button onPress={() => {this.props.navigator.pop()}}
@@ -38,7 +48,7 @@ export default class UploadPageContainer extends Component {
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
-        <MyForm onSubmit={(item) =>  addItem(item)}/>
+        <MyForm onSubmit={(item) =>  { addItem(item); Alert.alert("Your request was submitted!"); this.props.navigator.pop()}}/>
       </View>
     )
   }
