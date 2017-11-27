@@ -3,6 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { ScrollView, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import moment from 'moment';
 
+import MyDropdown from './MyDropdown';
 
 import MyTextInput from './MyTextInput';
 
@@ -109,7 +110,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
     marginTop: 25,
-    padding: 5
+    padding: 5,
+    paddingBottom: 100,
   },
   //   dropdown: {
   //   width: '30%',

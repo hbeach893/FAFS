@@ -13,10 +13,10 @@ import StartupPageContainer from './src/StartupPageContainer';
 import InventoryPageContainer from './src/Inventory/InventoryPageContainer';
 import UploadPageContainer from './src/Inventory/UploadPageContainer';
 
-import RidesharePageContainer from './src/Rides/RidesharePageContainer';
+import RideRequestsContainer from './src/Rides/RideRequestsContainer';
 import UploadRiderContainer from './src/Rides/UploadRiderContainer';
 import UploadDriverContainer from './src/Rides/UploadDriverContainer';
-
+import DriveRequestsContainer from './src/Rides/DriveRequestsContainer';
 
 const RouteMapper = (route, navigator) => {
   if (route.name === 'startup') {
@@ -28,14 +28,17 @@ const RouteMapper = (route, navigator) => {
   if (route.name === 'upload') {
     return <UploadPageContainer navigator={navigator}/>;
   }
-  if (route.name === 'ride_inventory') {
-    return <RidesharePageContainer navigator={navigator} />;
+  if (route.name === 'ride_requests') {
+    return <RideRequestsContainer navigator={navigator} />;
   }
   if (route.name === 'upload_ride_rider') {
     return <UploadRiderContainer navigator={navigator} />;
   }
   if (route.name === 'upload_ride_driver') {
     return <UploadDriverContainer navigator={navigator} />;
+  }
+  if (route.name === 'drive_requests') {
+    return <DriveRequestsContainer navigator={navigator}/>;
   }
 };
 
@@ -44,6 +47,7 @@ export const store = createStore(reducers, {}, applyMiddleware(apiMiddleware));
 
 store.dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true});
 store.dispatch({type: 'GET_RIDER_DATA', riders: [], loadingRiders:true});
+store.dispatch({type: 'GET_DRIVER_DATA', drivers: [], loadingDrivers: true});
 
 export default class App extends Component {
   render() {

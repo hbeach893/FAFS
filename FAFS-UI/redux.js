@@ -115,7 +115,6 @@ export const apiMiddleware = store => next => action => {
          fetch(driveRequest)
          .then((response)=>{
            if (response.ok){
-             Alert.alert(response._bodyInit);
              return response._bodyInit;
            }
          }).then(() => store.dispatch({type: 'GET_DRIVER_DATA' }));
@@ -124,7 +123,6 @@ export const apiMiddleware = store => next => action => {
       break;
 
   }
-    
 
 
 };

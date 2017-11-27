@@ -6,7 +6,7 @@ import {
   View,
   Alert
 } from 'react-native';
-import ItemDisplay from './ItemDisplay';
+import RideDisplay from './RideDisplay';
 import ItemPopup from './ItemPopup';
 import { connect } from 'react-redux';
 import {
@@ -16,19 +16,16 @@ import {
 } from 'react-native';
 
 
-
-
-
 @connect(
   state => ({
     riders: state.riderStatus.riders,
+    drivers: state.driverStatus.drivers,
     loading: state.riderStatus.loadingRiders,
   }),
   dispatch => ({
     refresh: () => dispatch({type: 'GET_RIDER_DATA', riders: [], loadingRiders:true}),
   }),
 )
-
 
 
 export default class RideRequests extends Component {
@@ -53,8 +50,8 @@ export default class RideRequests extends Component {
 
   // Untill here
   render() {
-   const { riders, loading, refresh } = this.props;
-   
+   const { riders, loading, refresh, drivers } = this.props;
+
     return (
       <View style={styles.container}>
       { riders ?
@@ -70,7 +67,7 @@ export default class RideRequests extends Component {
                 />
               }
         >
-          {riders.map((item, index) => <ItemDisplay
+          {riders.map((item, index) => <RideDisplay
             item={item}
             onOpen={this.openItem}
             key={index}
@@ -82,7 +79,6 @@ export default class RideRequests extends Component {
               size="large"
             />
           }
-          <Text>{ riders.length }</Text>
         <ItemPopup
           item={this.state.item}
           isOpen={this.state.popupIsOpen}

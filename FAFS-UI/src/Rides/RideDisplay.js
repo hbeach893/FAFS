@@ -14,7 +14,7 @@ const { width, height } = Dimensions.get('window');
 // How many posters we want to have in each row and column
 const cols = 3, rows = 3;
 
-export default class ItemDisplay extends Component {
+export default class RideDisplay extends Component {
   // Component prop types
   static propTypes = {
     // Movie object with title, genre, and poster
@@ -23,12 +23,13 @@ export default class ItemDisplay extends Component {
     onOpen: PropTypes.func.isRequired,
   }
   render() {
-    const { item, item: { start, dest, date, time, numSeats, riderEmail }, onOpen } = this.props;
+    const { item, item: { start, dest, date, time, numSeats, riderEmail, price }, onOpen } = this.props;
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(item)}>
         <Text style={styles.title} numberOfLines={1}>{start} to {dest}</Text>
         <Text style={styles.title} numberOfLines={1}>{date}</Text>
         <Text style={styles.title} numberOfLines={1}>{time}</Text>
+        <Text style={styles.title} numberOfLines={1}>{price}</Text>
       </TouchableOpacity>
     );
   }

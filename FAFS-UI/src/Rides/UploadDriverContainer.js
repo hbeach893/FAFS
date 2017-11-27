@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   Text,
-  Button
+  Button,
+  Alert
 } from 'react-native';
 
 @connect(
@@ -28,8 +29,8 @@ export default class UploadDriverContainer extends Component {
     driveObj.price = drive.price;
     driveObj.date = drive.date;
     driveObj.time = drive.time;
-    driveObj.numSeats = drive.numSeats;
-    driveObj.riderEmail = drive.riderEmail
+    driveObj.numSeats = drive.seats;
+    driveObj.riderEmail = drive.email;
     driveObj.datePosted = new Date();
     this.props.addDriveRequest(driveObj);
 
@@ -41,7 +42,7 @@ export default class UploadDriverContainer extends Component {
           color="#841584"
           accessibilityLabel="Upload a drive request"
         />
-        <DriverForm onSubmit={(driveRequest) =>  addDriveRequest(driveRequest)}/>
+        <DriverForm onSubmit={(driveRequest) =>  {addDriveRequest(driveRequest); Alert.alert("Your request was submitted!"); this.props.navigator.pop();}}/>
       </View>
     )
   }

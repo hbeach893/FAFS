@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RideRequests from './RideRequests';
-import NavBar from './NavBar';
+import RideNavBar from './RideNavBar';
 
 
 import {
@@ -13,12 +13,17 @@ import { connect } from 'react-redux';
 
 
 
-export default class RidesharePageContainer extends Component {
+export default class RideRequestsContainer extends Component {
   render() {
     const { sort } = this.props;
     return (
       <View style={styles.container}>
-        <NavBar navigator={this.props.navigator}/>
+        <RideNavBar navigator={this.props.navigator}/>
+        <Button onPress={() => this.props.navigator.push({name: 'drive_requests'})}
+          title="View Drives"
+          color="#841584"
+          accessibilityLabel="View the Inventory"
+        />
         <RideRequests/>
 
 

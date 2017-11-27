@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import MyForm from './MyRiderForm';
+import MyForm from './RiderForm';
 import { connect } from 'react-redux';
 import {
   View,
   StyleSheet,
   Text,
-  Button
+  Button,
+  Alert
 } from 'react-native';
 
 
@@ -28,8 +29,8 @@ export default class UploadRiderContainer extends Component {
       rideObj.dest = ride.dest;
       rideObj.date = ride.date;
       rideObj.time = ride.time;
-      rideObj.numSeats = ride.numSeats;
-      rideObj.riderEmail = ride.riderEmail
+      rideObj.numSeats = ride.seats;
+      rideObj.riderEmail = ride.email;
       rideObj.datePosted = new Date();
       this.props.addRideRequest(rideObj);
   }
@@ -41,7 +42,7 @@ export default class UploadRiderContainer extends Component {
           color="#841584"
           accessibilityLabel="Upload a ride request"
         />
-        <MyForm onSubmit={(rideRequest) => { addRideRequest(rideRequest)} }/>
+        <MyForm onSubmit={(rideRequest) => { addRideRequest(rideRequest); Alert.alert("Your request was submitted!"); this.props.navigator.pop()} }/>
       </View>
     )
   }
