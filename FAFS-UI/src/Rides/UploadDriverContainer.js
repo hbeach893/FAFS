@@ -33,7 +33,9 @@ export default class UploadDriverContainer extends Component {
     driveObj.riderEmail = drive.email;
     driveObj.datePosted = new Date();
     this.props.addDriveRequest(driveObj);
-
+    if (driveObj.dest.length > 0) {
+        this.props.addDriveRequest(driveObj);
+      }  
   }
     return (
       <View style={styles.container}>

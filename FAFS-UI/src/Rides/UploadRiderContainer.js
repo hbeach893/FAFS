@@ -32,7 +32,11 @@ export default class UploadRiderContainer extends Component {
       rideObj.numSeats = ride.seats;
       rideObj.riderEmail = ride.email;
       rideObj.datePosted = new Date();
-      this.props.addRideRequest(rideObj);
+      Alert.alert(JSON.stringify(rideObj));
+      if (rideObj.dest.length > 0){
+        this.props.addRideRequest(rideObj);
+      }
+      
   }
    
     return (
