@@ -23,13 +23,12 @@ export default class RideDisplay extends Component {
     onOpen: PropTypes.func.isRequired,
   }
   render() {
-    const { item, item: { start, dest, date, time, numSeats, riderEmail, price }, onOpen } = this.props;
+    const { item, item: { start, dest, date, time, numSeats, riderEmail }, onOpen } = this.props;
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(item)}>
         <Text style={styles.title} numberOfLines={1}>{start} to {dest}</Text>
-        <Text style={styles.title} numberOfLines={1}>{date}</Text>
-        <Text style={styles.title} numberOfLines={1}>{time}</Text>
-        <Text style={styles.title} numberOfLines={1}>{price}</Text>
+        <Text style={styles.title} numberOfLines={1}>{date} || {time} || {numSeats} seats </Text>
+        <Text style={styles.title} numberOfLines={1}>{riderEmail}</Text>
       </TouchableOpacity>
     );
   }
@@ -38,12 +37,12 @@ export default class RideDisplay extends Component {
 const styles = StyleSheet.create({
   container: {
     marginLeft: 10,
-    marginBottom: 10,
-    height: (height - 20 - 20) / rows - 10,
-    width: (width - 10) / cols - 10,
+    marginBottom: 30,
+    //height: (height - 600),
+    width: width,
   },
   imageContainer: {
-    flex: 1,                          // take up all available space
+    flex: 1,
   },
   image: {
     borderRadius: 10,                 // rounded corners
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
     ...defaultStyles.text,
     fontSize: 14,
     marginTop: 4,
+    textAlign: 'center'
   },
   genre: {
     ...defaultStyles.text,
