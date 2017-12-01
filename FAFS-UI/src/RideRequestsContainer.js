@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RideRequests from './RideRequests';
-import RideNavBar from './RideNavBar';
+import NavBar from './NavBar';
 
 
 import {
@@ -18,9 +18,9 @@ export default class RideRequestsContainer extends Component {
     const { sort } = this.props;
     return (
       <View style={styles.container}>
-        <RideNavBar navigator={this.props.navigator}/>
-        <Button onPress={() => this.props.navigator.push({name: 'drive_requests'})}
-          title="View Drives"
+        <NavBar navigator={this.props.navigator}/>
+        <Button onPress={() => this.props.navigator.push({name: 'upload_ride_driver'})}
+          title="Upload a Ride"
           color="#841584"
           accessibilityLabel="View the Inventory"
         />

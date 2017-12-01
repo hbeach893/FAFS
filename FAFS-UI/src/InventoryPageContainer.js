@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import DriveRequests from './DriveRequests';
-import RideNavBar from './RideNavBar';
-
+import Inventory from './Inventory';
+import NavBar from './NavBar';
+import FilterSection from './FilterSection';
 
 import {
   View,
@@ -13,18 +13,19 @@ import { connect } from 'react-redux';
 
 
 
-export default class DriveRequestsContainer extends Component {
+export default class InventoryPageContainer extends Component {
   render() {
     const { sort } = this.props;
     return (
       <View style={styles.container}>
-        <RideNavBar navigator={this.props.navigator}/>
-        <Button onPress={() => this.props.navigator.pop()}
-          title="View Rides"
+        <NavBar navigator={this.props.navigator}/>
+        <Button onPress={() => this.props.navigator.push({name: 'upload'})}
+          title="Upload an Item"
           color="#841584"
           accessibilityLabel="View the Inventory"
         />
-        <DriveRequests/>
+        <FilterSection/>
+        <Inventory/>
 
 
       </View>

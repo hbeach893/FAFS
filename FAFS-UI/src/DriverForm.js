@@ -13,6 +13,10 @@ const validate = values => {
   if(!values.dest) {
     errors.dest = 'Destination is required.'
   }
+  if(!values.price) {
+    errors.price = 'Price is required.'
+  } else if (!/^[1-9]\d*(?:\.\d{0,2})?$/i.test(values.price) && (values.price != '0')) {
+    errors.price = 'Item price must be a valid currency. If free, please put 0.' }
   if(!values.date) {
     errors.date = 'Departure date is required.'
   }
@@ -32,20 +36,20 @@ const validate = values => {
   return errors
 }
 
-function MyForm(props) {
+function DriverForm(props) {
   return (
     <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Starting location</Text>
       <Field
         name={'start'}
         component={MyTextInput}
-        placeholder={'Preferred starting location of ride'}
+        placeholder={'Starting location of ride'}
       />
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Destination</Text>
       <Field
         name={'dest'}
         component={MyTextInput}
-        placeholder={'Preferred destination of ride'}
+        placeholder={'Ride destination'}
       />
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Departure date (mm/dd/yy)</Text>
       <Field
@@ -57,13 +61,19 @@ function MyForm(props) {
       <Field
         name={'time'}
         component={MyTextInput}
-        placeholder={'Preferred departure time'}
+        placeholder={'Departure time'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Seats needed</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Available seats</Text>
       <Field
         name={'seats'}
         component={MyTextInput}
-        placeholder={'Number of desired seats'}
+        placeholder={'Number of available seats'}
+      />
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Price per seat</Text>
+      <Field
+        name={'price'}
+        component={MyTextInput}
+        placeholder={'Requested price per seat'}
       />
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Your Email</Text>
       <Field
@@ -83,12 +93,13 @@ function MyForm(props) {
 export default reduxForm({
   form: 'uploadItem',
   validate
-})(MyForm);
+})(DriverForm);
 
 
 const styles = StyleSheet.create({
   container: {
-    padding: 45
+    padding: 45,
+    flex: 1
   },
   formSubmit: {
     alignSelf: 'center',
