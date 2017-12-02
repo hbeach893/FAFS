@@ -31,10 +31,11 @@ export default class UploadPageContainer extends Component {
 
     const addItem = (item) => {
       const itemObj = {}
+      var priceNum = item.itemPrice.replace("$", "");
       itemObj.title = item.itemName;
       itemObj.desc = item.itemDescription;
       itemObj.image = item.itemImage;
-      itemObj.price = item.itemPrice;
+      itemObj.price = "$" + priceNum;
       itemObj.ownerEmail = item.email;
       itemObj.datePosted = new Date();
       itemObj.type = [item.type];

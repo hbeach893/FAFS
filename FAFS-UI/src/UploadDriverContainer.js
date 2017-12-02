@@ -14,7 +14,7 @@ import {
 
   }),
   dispatch => ({
-    addDriveRequest: (driveObj) => dispatch({type: 'ADD_DRIVE_REQUEST', newDriveRequest: driveObj}),
+    addDriveRequestRedux: (driveObj) => dispatch({type: 'ADD_DRIVE_REQUEST', newDriveRequest: driveObj}),
   }),
 )
 
@@ -23,18 +23,18 @@ export default class UploadDriverContainer extends Component {
   render() {
 
   const addDriveRequest = (drive) => {
-    const driveObj = {}
+    const driveObj = {};
+    var priceNum = drive.price.replace("$", "");
     driveObj.start = drive.start;
     driveObj.dest = drive.dest;
-    driveObj.price = drive.price;
+    driveObj.price = "$" + priceNum;
     driveObj.date = drive.date;
     driveObj.time = drive.time;
     driveObj.numSeats = drive.seats;
     driveObj.riderEmail = drive.email;
     driveObj.datePosted = new Date();
-    this.props.addDriveRequest(driveObj);
     if (driveObj.dest.length > 0) {
-        this.props.addDriveRequest(driveObj);
+        this.props.addDriveRequestRedux(driveObj);
       }  
   }
     return (

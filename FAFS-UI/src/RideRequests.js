@@ -18,12 +18,11 @@ import {
 
 @connect(
   state => ({
-    riders: state.riderStatus.riders,
     drivers: state.driverStatus.drivers,
-    loading: state.riderStatus.loadingRiders,
+    loading: state.driverStatus.loadingDrivers,
   }),
   dispatch => ({
-    refresh: () => dispatch({type: 'GET_RIDER_DATA', riders: [], loadingRiders:true}),
+    refresh: () => dispatch({type: 'GET_RIDER_DATA', drivers: [], loadingDrivers:true}),
   }),
 )
 
@@ -50,11 +49,11 @@ export default class RideRequests extends Component {
 
   // Untill here
   render() {
-   const { riders, loading, refresh, drivers } = this.props;
+   const { loading, refresh, drivers } = this.props;
 
     return (
       <View style={styles.container}>
-      { riders ?
+      { drivers ?
         <ScrollView
           contentContainerStyle={styles.scrollContent}
 		  // Hide all scroll indicators
@@ -67,7 +66,7 @@ export default class RideRequests extends Component {
                 />
               }
         >
-          {riders.map((item, index) => <RideDisplay
+          {drivers.map((item, index) => <RideDisplay
             item={item}
             onOpen={this.openItem}
             key={index}

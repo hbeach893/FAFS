@@ -37,7 +37,6 @@ const RouteMapper = (route, navigator) => {
 export const store = createStore(reducers, {}, applyMiddleware(apiMiddleware));
 
 store.dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true});
-store.dispatch({type: 'GET_RIDER_DATA', riders: [], loadingRiders:true});
 store.dispatch({type: 'GET_DRIVER_DATA', drivers: [], loadingDrivers: true});
 
 export default class App extends Component {

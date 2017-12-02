@@ -27,23 +27,6 @@ export const apiMiddleware = store => next => action => {
           error
         }));
       break;
-
-    case 'GET_RIDER_DATA':
-      // Dispatch GET_RIDER_DATA_LOADING to update loading state
-      store.dispatch({type: 'GET_RIDER_DATA_LOADING', riders: [], loadingRiders: true});
-      // Make API call and dispatch appropriate actions when done
-      fetch(`${API}/riderequests`)
-        .then(response => response.json())
-        .then(data => next({
-          type: 'GET_RIDER_DATA_RECEIVED',
-          data,
-
-        }))
-        .catch(error => next({
-          type: 'GET_RIDER_DATA_ERROR',
-          error
-        }));
-      break;
    
     case 'GET_DRIVER_DATA':
       // Dispatch GET_DRIVER_DATA_LOADING to update loading state
@@ -80,28 +63,9 @@ export const apiMiddleware = store => next => action => {
              return response._bodyInit;
            }
          }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA' }));
-    
-    case 'ADD_RIDE_REQUEST':
-
-      const rideRequest = new Request(
-        `${API}/riderequests` ,
-           {
-             method:'POST',
-             body: JSON.stringify(action.newRideRequest),
-             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            }}
-         )
-         fetch(rideRequest)
-         .then((response)=>{
-           if (response.ok){
-             return response._bodyInit;
-           }
-         }).then(() => store.dispatch({type: 'GET_RIDER_DATA' }));
+        break;
 
     case 'ADD_DRIVE_REQUEST':
-
       const driveRequest = new Request(
         `${API}/driverequests` ,
            {
@@ -118,7 +82,7 @@ export const apiMiddleware = store => next => action => {
              return response._bodyInit;
            }
          }).then(() => store.dispatch({type: 'GET_DRIVER_DATA' }));
-
+         break;
     default:
       break;
 
@@ -147,26 +111,6 @@ const inventoryStatus = (state = { inventoryitems: [], loading: true}, action) =
     }
 };
 
-const riderStatus = (state = { riders: [], loadingRiders: true}, action) => {
-  switch (action.type) {
-
-    case 'GET_RIDER_DATA_LOADING':
-
-      return {
-        ...state,                   // keep the existing state,
-        loadingRiders: true,              // but change loading to true
-      };
-    case 'GET_RIDER_DATA_RECEIVED':
-      return {
-        loadingRiders: false,             // set loading to false
-        riders: action.data.riderequests, // update riders array with reponse data
-      };
-    case 'GET_RIDER_DATA_ERROR':
-      return state;
-    default:
-      return state;
-    }
-};
 
 const driverStatus = (state = { drivers: [], loadingDrivers: true}, action) => {
   switch (action.type) {
@@ -286,7 +230,6 @@ const filterByKey = (myArray, filterKey) => {
 export const reducers = combineReducers({
   inventoryStatus,
   filterInventory,
-  riderStatus,
   driverStatus,
   form
 });
