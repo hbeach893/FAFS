@@ -63,7 +63,7 @@ export const apiMiddleware = store => next => action => {
              return response._bodyInit;
            }
          }).then(() => store.dispatch({type: 'GET_INVENTORY_DATA' }));
-        break;
+      break;
 
     case 'ADD_DRIVE_REQUEST':
       const driveRequest = new Request(
@@ -82,7 +82,8 @@ export const apiMiddleware = store => next => action => {
              return response._bodyInit;
            }
          }).then(() => store.dispatch({type: 'GET_DRIVER_DATA' }));
-         break;
+      break;
+
     default:
       break;
 

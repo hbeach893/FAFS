@@ -11,7 +11,7 @@ export default function MyDropdown(props) {
 
 	return(
 		<View style={[styles.inputContainer, validationStyles]}>
-		 	<ModalDropdown name="type" textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Furniture', 'Clothes', 'Appliances', 'Shoes', 'Accessory']} defaultValue="Select" value = {input.value}
+		 	<ModalDropdown name="type" textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Furniture', 'Clothes', 'Books', 'Appliances', 'Shoes', 'Accessories']} defaultValue="Select" value = {input.value}
 		 	onSelect={(itemIndex, itemValue) => {input.onChange(itemValue)}}
         />
         { meta.touched && meta.error && <Text>{ meta.error }</Text> }
