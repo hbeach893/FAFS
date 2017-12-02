@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RideRequests from './RideRequests';
 import NavBar from './NavBar';
-
+import FilterRides from './FilterRides';
 
 import {
   View,
@@ -24,6 +24,7 @@ export default class RideRequestsContainer extends Component {
           color="#841584"
           accessibilityLabel="View the Inventory"
         />
+        <FilterRides/>
         <RideRequests/>
 
 

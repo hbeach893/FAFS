@@ -136,7 +136,7 @@ const driverStatus = (state = { drivers: [], loadingDrivers: true}, action) => {
 
 const filterInventory = (state = { inventoryitems: [], filteredItems: [], filterKey: '', sortKey: '', searchKey: ''}, action) => {
   switch(action.type) {
-    case 'CLEAR_FILTERS':
+    case 'CLEAR_INVENTORY_FILTERS':
       return {
         ...state,
         filterKey: '',
@@ -172,6 +172,27 @@ const filterInventory = (state = { inventoryitems: [], filteredItems: [], filter
     default:
       return state 
   } 
+}
+
+const filterRides = (state = {filteredRides: [], drivers: [], searchKey: ''}, action) => {
+  switch(action.type) {
+    case 'CLEAR_RIDE_FILTERS':
+      return {
+        ...state,
+        filteredRides: [],
+        drivers: [],
+        searchKey: '' 
+      }
+    case 'SEARCH_RIDES':
+      var searchedRides = searchRidesByKey(action.drivers, action.searchKey);
+      return {
+        ...state,
+        searchKey: action.searchKey,
+        filteredRides: searchedRides,
+      }
+    default:
+      return state
+  }
 }
 
 const compareNameAtoZ = (a,b) => {
@@ -251,9 +272,16 @@ const searchByKey = (myArray, searchKey) => {
   return searchedWords;
 }
 
+const searchRidesByKey = (myArray, searchKey) => {
+  searchKey = searchKey.toLowerCase();
+  let searchedWords = myArray.slice().filter(ride => (ride.start.toLowerCase().includes(searchKey) || ride.dest.toLowerCase().includes(searchKey) || ride.date.toLowerCase().includes(searchKey)));
+  return searchedWords;
+}
+
 export const reducers = combineReducers({
   inventoryStatus,
   filterInventory,
+  filterRides,
   driverStatus,
   form
 });
