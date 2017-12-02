@@ -174,7 +174,7 @@ const filterInventory = (state = { inventoryitems: [], filteredItems: [], filter
   } 
 }
 
-const filterRides = (state = {filteredRides: [], drivers: [], searchKey: ''}, action) => {
+const filterRides = (state = {filteredRides: [], drivers: [], origin: '', destination: '', date:''}, action) => {
   switch(action.type) {
     case 'CLEAR_RIDE_FILTERS':
       return {
@@ -184,7 +184,7 @@ const filterRides = (state = {filteredRides: [], drivers: [], searchKey: ''}, ac
         searchKey: '' 
       }
     case 'SEARCH_RIDES':
-      var searchedRides = searchRidesByKey(action.drivers, action.searchKey);
+      var searchedRides = searchRidesByKey(action.drivers, action.origin, action.destination, action.date);
       return {
         ...state,
         searchKey: action.searchKey,
@@ -272,9 +272,22 @@ const searchByKey = (myArray, searchKey) => {
   return searchedWords;
 }
 
-const searchRidesByKey = (myArray, searchKey) => {
-  searchKey = searchKey.toLowerCase();
-  let searchedWords = myArray.slice().filter(ride => (ride.start.toLowerCase().includes(searchKey) || ride.dest.toLowerCase().includes(searchKey) || ride.date.toLowerCase().includes(searchKey)));
+const searchRidesByKey = (myArray, origin, destination, date) => {
+  origin = origin.toLowerCase();
+  destination = destination.toLowerCase();
+  date = date.split("-");
+  var searchYear = date[0];
+  var searchMonth = date[1];
+  var searchDate = date[2];
+  let searchedWords = myArray.slice().filter(ride => {
+    dateArray = ride.date.split("/");
+    var month = dateArray[0];
+    var date = dateArray[1];
+    var year = dateArray[2];
+    if (ride.start.toLowerCase().includes(origin) && ride.dest.toLowerCase().includes(destination) && month.includes(searchMonth) && date.includes(searchDate) && year.includes(searchYear)) {
+      return ride;
+    }
+  });
   return searchedWords;
 }
 
