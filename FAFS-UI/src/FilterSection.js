@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  View
+  View,
+  TextInput,
+  Alert,
+  Button
 } from 'react-native';
 import { connect } from 'react-redux';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -17,21 +20,42 @@ import ModalDropdown from 'react-native-modal-dropdown';
   dispatch => ({
     refresh: () => dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true}),
     sort: (inventoryitems, sortKey, filterKey) => dispatch({type: 'SORT_BY_SORT_KEY', inventoryitems: inventoryitems, sortKey: sortKey}),
-    filter: (inventoryitems, filterKey, sortKey) => dispatch({type: 'FILTER_BY_FILTER_KEY', inventoryitems: inventoryitems, filterKey: filterKey})
+    filter: (inventoryitems, filterKey, sortKey) => dispatch({type: 'FILTER_BY_FILTER_KEY', inventoryitems: inventoryitems, filterKey: filterKey}),
+    search: (inventoryitems, searchKey) => dispatch({type: 'SEARCH_BY_SEARCH_KEY', inventoryitems: inventoryitems, searchKey: searchKey})
   }),
 )
 
 
 export default class FilterSection extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {searchTerm: ''};
+  }
   render(){
     return (
       <View style = {styles.container}>
-        <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Price: Low to High', 'Price: High to Low', 'A-Z', 'Z-A']} defaultValue="Sort" onSelect={(itemIndex, itemValue) => {
-          this.props.sort(this.props.inventoryitems, itemValue, this.props.filterKey);
-        }}/>
-        <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['All', 'Furniture', 'Clothes', 'Books', 'Appliances', 'Shoes', 'Accessories']} defaultValue="Filter" onSelect={(itemIndex, itemValue) => {
-          this.props.filter(this.props.inventoryitems, itemValue, this.props.sortKey);
-        }}/>
+        <View style = {styles.dropdownsContainer}>
+          <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Price: Low to High', 'Price: High to Low', 'A-Z', 'Z-A']} defaultValue="Sort" onSelect={(itemIndex, itemValue) => {
+            this.props.sort(this.props.inventoryitems, itemValue, this.props.filterKey);
+          }}/>
+          <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['All', 'Furniture', 'Clothes', 'Books', 'Appliances', 'Shoes', 'Accessories']} defaultValue="Filter" onSelect={(itemIndex, itemValue) => {
+            this.props.filter(this.props.inventoryitems, itemValue, this.props.sortKey);
+          }}/>
+        </View>
+        <View style = {styles.searchContainer}>
+          <TextInput
+            style={styles.search}
+            placeholder="Search for an item!"
+            onChangeText={(searchTerm) => this.setState({searchTerm})}
+          />
+          <Button
+            style = {styles.searchButton}
+            onPress={() => this.props.search(this.props.inventoryitems, this.state.searchTerm)}
+            title="Search"
+            color="#841584"
+            accessibilityLabel="Search"
+          />
+        </View>
       </View>
   )
   }
@@ -39,9 +63,18 @@ export default class FilterSection extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: 10,
-    paddingTop: 50,
-    paddingBottom: 20,
+    height:100,
+  },
+  dropdownsContainer: {
+    height: 50,
+    paddingTop: 25,
+    paddingBottom: 25,
+    flexDirection: 'row',
+  },
+  searchContainer: {
+    height: 50,
+    paddingTop: 25,
+    paddingBottom: 25,
     flexDirection: 'row',
   },
   dropdown: {
@@ -58,6 +91,16 @@ const styles = StyleSheet.create({
   dropdownText: {
     fontSize: 16,
     textAlign: 'center'
+  },
+  search: {
+    height: 50,
+    textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+    width: '75%'
+  },
+  searchButton: {
+    width: '25%'
   }
   
 });

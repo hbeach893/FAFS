@@ -9,6 +9,7 @@
     "cors": "^2.8.4",
     "jest-expo": "^21.0.2",
     "react-native-deprecated-custom-components": "^0.1.1",
+    "react-native-dismiss-keyboard": "^1.0.0",
     "react-native-scripts": "1.5.0",
     "react-native-select-input": "^1.0.1",
     "react-test-renderer": "16.0.0-alpha.12",

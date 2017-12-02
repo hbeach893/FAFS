@@ -134,8 +134,17 @@ const driverStatus = (state = { drivers: [], loadingDrivers: true}, action) => {
     }
 };
 
-const filterInventory = (state = { inventoryitems: [], filteredItems: [], filterKey: '', sortKey: ''}, action) => {
+const filterInventory = (state = { inventoryitems: [], filteredItems: [], filterKey: '', sortKey: '', searchKey: ''}, action) => {
   switch(action.type) {
+    case 'CLEAR_FILTERS': 
+      Alert.alert("heyy");
+      return {
+        ...state,
+        filterKey: '',
+        sortKey: '',
+        searchKey: '',
+        filteredItems: [],        
+      }
     case 'FILTER_BY_FILTER_KEY':
       var filteredInventoryItems = filterByKey(action.inventoryitems, action.filterKey);
       var sortedInventoryItems = sortByKey(filteredInventoryItems, state.sortKey);
@@ -150,6 +159,15 @@ const filterInventory = (state = { inventoryitems: [], filteredItems: [], filter
       return {
         ...state,
         sortKey: action.sortKey,
+        filteredItems: filteredInventoryItems,
+      }
+    case 'SEARCH_BY_SEARCH_KEY':
+      var searchedInventoryItems = searchByKey(action.inventoryitems, action.searchKey)
+      var sortedInventoryItems = sortByKey(searchedInventoryItems, state.sortKey);
+      var filteredInventoryItems = filterByKey(sortedInventoryItems, state.filterKey);
+      return {
+        ...state,
+        searchKey: action.searchKey,
         filteredItems: filteredInventoryItems,
       }
     default:
@@ -226,6 +244,12 @@ const filterByKey = (myArray, filterKey) => {
   else {
     return myArray.slice();
   }
+}
+
+const searchByKey = (myArray, searchKey) => {
+  searchKey = searchKey.toLowerCase();
+  let searchedWords = myArray.slice().filter(item => (item.title.toLowerCase().includes(searchKey) || item.desc.toLowerCase().includes(searchKey)));
+  return searchedWords;
 }
 
 export const reducers = combineReducers({

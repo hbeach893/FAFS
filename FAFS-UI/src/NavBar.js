@@ -6,7 +6,15 @@ import {
   Button,
   Alert
 } from 'react-native';
+import { connect } from 'react-redux';
 
+@connect(
+  state => ({
+  }),
+  dispatch => ({
+    refresh: () => dispatch({type: 'CLEAR_FILTERS'}),
+  }),
+)
 
 export default class NavBar extends Component {
   render() {
@@ -14,7 +22,7 @@ export default class NavBar extends Component {
       <View style = {styles.container}>
         <Button large
           color = "purple"
-          onPress={() => this.props.navigator.push({name: 'inventory'})}
+          onPress={() => {this.props.navigator.push({name: 'inventory'}); this.props.refresh()}}
           title="INVENTORY"
           accessibilityLabel="Upload an item"
         />
