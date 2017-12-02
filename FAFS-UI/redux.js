@@ -136,8 +136,7 @@ const driverStatus = (state = { drivers: [], loadingDrivers: true}, action) => {
 
 const filterInventory = (state = { inventoryitems: [], filteredItems: [], filterKey: '', sortKey: '', searchKey: ''}, action) => {
   switch(action.type) {
-    case 'CLEAR_FILTERS': 
-      Alert.alert("heyy");
+    case 'CLEAR_FILTERS':g
       return {
         ...state,
         filterKey: '',
