@@ -25,11 +25,16 @@ export default class UploadRideContainer extends Component {
   const addDriveRequest = (drive) => {
     const driveObj = {};
     var priceNum = drive.price.replace("$", "");
+    var timeArray = drive.time.split(':');
+    var hours = timeArray[0];
+    var minutes = timeArray[1];
+    var minutes = minutes.length > 1 ? minues : "0" + minutes;
+    var time = hours + ":" + minutes;
     driveObj.start = drive.start;
     driveObj.dest = drive.dest;
     driveObj.price = "$" + priceNum;
     driveObj.date = drive.date;
-    driveObj.time = drive.time;
+    driveObj.time = time;
     driveObj.numSeats = drive.seats;
     driveObj.riderEmail = drive.email;
     driveObj.datePosted = new Date();

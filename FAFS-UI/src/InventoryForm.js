@@ -37,38 +37,38 @@ const validate = values => {
 function InventoryForm(props) {
   return (
     <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
-      <Text style={{fontSize: 24, textAlign: 'center'}}>Item Form</Text>
-      <Text style={{ fontWeight: 'bold', marginTop: 10 }}>Name of Item</Text>
+      <Text style={{fontSize: 24, textAlign: 'center', marginBottom: 20}}>Item Form</Text>
+      <Text style={{ fontWeight: 'bold'}}>Name of Item</Text>
       <Field
         name={'itemName'}
         component={MyTextInput}
         placeholder={'Name of item'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Description of Item</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Description of item</Text>
       <Field
         name={'itemDescription'}
         component={MyTextInput}
         placeholder={'Description of item'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Price of Item</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Price of item (USD)</Text>
       <Field
         name={'itemPrice'}
         component={MyTextInput}
         placeholder={'Price of item'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Image of Item</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Image of item</Text>
       <Field
         name={'itemImage'}
         component={MyTextInput}
         placeholder={'Image URL'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Your Email</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Your email</Text>
       <Field
         name={'email'}
         component={MyTextInput}
         placeholder={'Your email'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Type of Item</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Type of item</Text>
       <Field
         name={'type'}
         component={MyDropdown}
@@ -104,7 +104,7 @@ export default reduxForm({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 25,
+    padding: 50,
   },
   formSubmit: {
     alignSelf: 'center',

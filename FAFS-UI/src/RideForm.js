@@ -4,6 +4,9 @@ import { ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import moment from 'moment';
 
 import MyTextInput from './MyTextInput';
+import MyDatepicker from './MyDatepicker';
+import MyTimepicker from './MyTimepicker';
+import TimePicker from 'react-native-simple-time-picker';
 
 const validate = values => {
   const errors = {}
@@ -39,8 +42,8 @@ const validate = values => {
 function RideForm(props) {
   return (
     <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
-      <Text style={{fontSize: 24, textAlign: 'center'}}>Ride Form</Text>
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Starting location</Text>
+      <Text style={{fontSize: 24, textAlign: 'center', marginBottom: 20}}>Ride Form</Text>
+      <Text style={{ fontWeight: 'bold'}}>Starting location</Text>
       <Field
         name={'start'}
         component={MyTextInput}
@@ -52,31 +55,31 @@ function RideForm(props) {
         component={MyTextInput}
         placeholder={'Ride destination'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Departure date (mm/dd/yy)</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Departure date </Text>
       <Field
         name={'date'}
-        component={MyTextInput}
+        component={MyDatepicker}
         placeholder={'Preferred departure date'}
       />
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Departure time</Text>
       <Field
         name={'time'}
-        component={MyTextInput}
+        component={MyTimepicker}
         placeholder={'Departure time'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Available seats</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Number of available seats</Text>
       <Field
         name={'seats'}
         component={MyTextInput}
         placeholder={'Number of available seats'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Price per seat</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Price per seat (USD)</Text>
       <Field
         name={'price'}
         component={MyTextInput}
         placeholder={'Requested price per seat'}
       />
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Your Email</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Your email</Text>
       <Field
         name={'email'}
         component={MyTextInput}
@@ -99,7 +102,7 @@ export default reduxForm({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 25,
+    padding: 50,
   },
   formSubmit: {
     alignSelf: 'center',

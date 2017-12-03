@@ -17,10 +17,15 @@ const cols = 3, rows = 3;
 export default class RideDisplay extends Component {
   render() {
     const { item, item: { start, dest, date, time, numSeats, riderEmail, price }, onOpen } = this.props;
+    var dateArray = date.split('-');
+    var year = dateArray[0];
+    var month = dateArray[1];
+    var day = dateArray[2];
+    newDate = month + "/" + day + "/" + year
     return (
       <TouchableOpacity style={styles.container}>
         <Text style={styles.title} numberOfLines={1}>{start} to {dest} - {price}</Text>
-        <Text style={styles.details} numberOfLines={1}>{date} || {time} || {numSeats} seats </Text>
+        <Text style={styles.details} numberOfLines={1}>{newDate} || {time} || {numSeats} seats </Text>
         <Text style={styles.details} numberOfLines={1}>{riderEmail}</Text>
       </TouchableOpacity>
     );
