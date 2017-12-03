@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Inventory from './Inventory';
 import NavBar from './NavBar';
-import MyForm from './MyForm';
+import InventoryForm from './InventoryForm';
 import { connect } from 'react-redux';
 import {
   View,
@@ -44,12 +44,8 @@ export default class UploadPageContainer extends Component {
     }
     return (
       <View style={styles.container}>
-        <Button onPress={() => {this.props.navigator.pop()}}
-          title="Back to Available Inventory"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
-        <MyForm onSubmit={(item) =>  { addItem(item); Alert.alert("Your request was submitted!"); this.props.navigator.pop()}}/>
+        <NavBar navigator={this.props.navigator}/>
+        <InventoryForm onSubmit={(item) =>  { addItem(item); Alert.alert("Your request was submitted!"); this.props.navigator.pop()}}/>
       </View>
     )
   }
@@ -58,7 +54,7 @@ export default class UploadPageContainer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,         // start below status bar
+    paddingTop:30,         // start below status bar
     flex: 1
   },
 });

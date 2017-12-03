@@ -28,25 +28,7 @@ import {
 )
 
 
-export default class RideRequests extends Component {
-  // Add starting here
-  state = {
-    popupIsOpen: false,
-  }
-
-  openItem = (item) => {
-    this.setState({
-      popupIsOpen: true,
-      item,
-    });
-  }
-
-  closeItem = () => {
-    this.setState({
-      popupIsOpen: false,
-    });
-  }
-
+export default class Rides extends Component {
 
   // Untill here
   render() {
@@ -79,11 +61,7 @@ export default class RideRequests extends Component {
               size="large"
             />
           }
-        <ItemPopup
-          item={this.state.item}
-          isOpen={this.state.popupIsOpen}
-          onClose={this.closeItem}
-        />
+
       </View>
     );
   }

@@ -20,29 +20,44 @@ import { connect } from 'react-redux';
 export default class NavBar extends Component {
   render() {
     return (
-      <View style = {styles.container}>
-        <Button large
-          color = "purple"
-          onPress={() => {this.props.navigator.push({name: 'inventory'}); this.props.refreshInventory()}}
-          title="INVENTORY"
-          accessibilityLabel="Upload an item"
-        />
-        <Button onPress={() => {this.props.navigator.push({name: 'ride_requests'}); this.props.refreshRides()}}
-          title="RIDES"
-          accessibilityLabel="View Rideshare Page"
-        />
+      <View style={styles.container}>
+        <Text style={styles.header}>Middlebury's Free and For Sale</Text>
+        <View style = {styles.buttonsContainer}>
+          <Button large
+            color = "white"
+            onPress={() => {this.props.navigator.push({name: 'inventory'}); this.props.refreshInventory()}}
+            title="INVENTORY"
+            accessibilityLabel="Upload an item"
+          />
+          <Button onPress={() => {this.props.navigator.push({name: 'rides'}); this.props.refreshRides()}}
+            color="white"
+            title="RIDES"
+            accessibilityLabel="View Rideshare Page"
+          />
+          <Button onPress={() => {this.props.navigator.push({name: 'upload_page'}); this.props.refreshRides()}}
+            color="white"
+            title="UPLOAD"
+            accessibilityLabel="View Rideshare Page"
+          />
+        </View>
       </View>
-
     )
   }
 };
 
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
+    textAlign: 'center',
+    color: 'navy',
+    fontSize: 20,
+    marginBottom: 10
+  },
+  buttonsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    backgroundColor: 'navy'
     //height: '5%',
    },
 });

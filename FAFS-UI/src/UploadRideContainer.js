@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DriverForm from './DriverForm';
+import RideForm from './RideForm';
 import { connect } from 'react-redux';
 import {
   View,
@@ -8,7 +8,7 @@ import {
   Button,
   Alert
 } from 'react-native';
-
+import NavBar from './NavBar';
 @connect(
   state => ({
 
@@ -19,7 +19,7 @@ import {
 )
 
 
-export default class UploadDriverContainer extends Component {
+export default class UploadRideContainer extends Component {
   render() {
 
   const addDriveRequest = (drive) => {
@@ -39,12 +39,8 @@ export default class UploadDriverContainer extends Component {
   }
     return (
       <View style={styles.container}>
-        <Button onPress={() => {this.props.navigator.pop()}}
-          title="Back to Available Rides"
-          color="#841584"
-          accessibilityLabel="Upload a drive request"
-        />
-        <DriverForm onSubmit={(driveRequest) =>  {addDriveRequest(driveRequest); Alert.alert("Your request was submitted!"); this.props.navigator.pop();}}/>
+         <NavBar navigator={this.props.navigator}/>
+        <RideForm onSubmit={(driveRequest) =>  {addDriveRequest(driveRequest); Alert.alert("Your request was submitted!"); this.props.navigator.pop();}}/>
       </View>
     )
   }
@@ -54,6 +50,6 @@ export default class UploadDriverContainer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,         // start below status bar
+    paddingTop: 30,         // start below status bar
   },
 });

@@ -26,7 +26,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 )
 
 
-export default class FilterSection extends Component {
+export default class FilterInventory extends Component {
   constructor(props) {
     super(props);
     this.state = {searchTerm: ''};
@@ -52,7 +52,7 @@ export default class FilterSection extends Component {
             style = {styles.searchButton}
             onPress={() => this.props.search(this.props.inventoryitems, this.state.searchTerm)}
             title="Search"
-            color="#841584"
+            color="navy"
             accessibilityLabel="Search"
           />
         </View>
@@ -64,17 +64,14 @@ export default class FilterSection extends Component {
 const styles = StyleSheet.create({
   container: {
     height:100,
+    paddingTop:10,
   },
   dropdownsContainer: {
     height: 50,
-    paddingTop: 25,
-    paddingBottom: 25,
     flexDirection: 'row',
   },
   searchContainer: {
     height: 50,
-    paddingTop: 25,
-    paddingBottom: 25,
     flexDirection: 'row',
   },
   dropdown: {
@@ -86,7 +83,8 @@ const styles = StyleSheet.create({
   },
   dropdownDefaultText: {
     fontSize: 18,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'navy'
   },
   dropdownText: {
     fontSize: 16,
@@ -95,8 +93,6 @@ const styles = StyleSheet.create({
   search: {
     height: 50,
     textAlign: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
     width: '75%'
   },
   searchButton: {

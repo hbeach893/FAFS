@@ -78,13 +78,15 @@ export default class FilterRides extends Component {
             }}
             onDateChange={(date) => {this.setState({date: date})}}
           />
+          <View style={{marginTop: 10}}>
           <Button
             style = {styles.searchButton}
             onPress={() => this.props.search(this.props.drivers, this.state.origin, this.state.destination, this.state.date)}
             title="Search"
-            color="#841584"
+            color="navy"
             accessibilityLabel="Search"
           />
+          </View>
         </View>
     </View>
   )}
@@ -96,14 +98,11 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     height: 50,
-    paddingTop: 25,
-    paddingBottom: 25,
+    paddingTop:5,
     flexDirection: 'row',
   },
   timesContainer: {
     height: 50,
-    paddingTop: 25,
-    paddingBottom: 25,
     flexDirection: 'row',
   },
   search: {
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
   },
     searchButton: {
     width: '25%',
-    paddingTop: 50,
+    marginTop: 50,
   }
 })
   

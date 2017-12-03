@@ -36,9 +36,10 @@ const validate = values => {
   return errors
 }
 
-function DriverForm(props) {
+function RideForm(props) {
   return (
     <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
+      <Text style={{fontSize: 24, textAlign: 'center'}}>Ride Form</Text>
       <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Starting location</Text>
       <Field
         name={'start'}
@@ -93,13 +94,12 @@ function DriverForm(props) {
 export default reduxForm({
   form: 'uploadItem',
   validate
-})(DriverForm);
+})(RideForm);
 
 
 const styles = StyleSheet.create({
   container: {
-    padding: 45,
-    flex: 1
+    padding: 25,
   },
   formSubmit: {
     alignSelf: 'center',
@@ -108,5 +108,13 @@ const styles = StyleSheet.create({
     marginTop: 25,
     padding: 5,
     paddingBottom: 100,
+  },
+  dropdownDefaultText: {
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  dropdownText: {
+    fontSize: 16,
+    textAlign: 'center'
   }
 });

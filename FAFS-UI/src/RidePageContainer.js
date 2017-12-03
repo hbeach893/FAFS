@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RideRequests from './RideRequests';
+import Rides from './Rides';
 import NavBar from './NavBar';
 import FilterRides from './FilterRides';
 
@@ -13,19 +13,14 @@ import { connect } from 'react-redux';
 
 
 
-export default class RideRequestsContainer extends Component {
+export default class RidePageContainer extends Component {
   render() {
     const { sort } = this.props;
     return (
       <View style={styles.container}>
         <NavBar navigator={this.props.navigator}/>
-        <Button onPress={() => this.props.navigator.push({name: 'upload_ride_driver'})}
-          title="Upload a Ride"
-          color="#841584"
-          accessibilityLabel="View the Inventory"
-        />
         <FilterRides/>
-        <RideRequests/>
+        <Rides/>
 
 
       </View>

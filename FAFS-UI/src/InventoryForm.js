@@ -34,10 +34,11 @@ const validate = values => {
   return errors
 }
 
-function MyForm(props) {
+function InventoryForm(props) {
   return (
     <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Name of Item</Text>
+      <Text style={{fontSize: 24, textAlign: 'center'}}>Item Form</Text>
+      <Text style={{ fontWeight: 'bold', marginTop: 10 }}>Name of Item</Text>
       <Field
         name={'itemName'}
         component={MyTextInput}
@@ -98,12 +99,12 @@ function MyForm(props) {
 export default reduxForm({
   form: 'uploadItem',
   validate
-})(MyForm);
+})(InventoryForm);
 
 
 const styles = StyleSheet.create({
   container: {
-    padding: 45,
+    padding: 25,
   },
   formSubmit: {
     alignSelf: 'center',
@@ -112,13 +113,6 @@ const styles = StyleSheet.create({
     marginTop: 25,
     padding: 5,
     paddingBottom: 100,
-  },
-  //   dropdown: {
-  //   width: '30%',
-
-  // },
-  dropdownStyle: {
-    
   },
   dropdownDefaultText: {
     fontSize: 18,

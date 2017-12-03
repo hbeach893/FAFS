@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Inventory from './Inventory';
 import NavBar from './NavBar';
-import FilterSection from './FilterSection';
+import FilterInventory from './FilterInventory';
 
 import {
   View,
@@ -19,12 +19,7 @@ export default class InventoryPageContainer extends Component {
     return (
       <View style={styles.container}>
         <NavBar navigator={this.props.navigator}/>
-        <Button onPress={() => this.props.navigator.push({name: 'upload'})}
-          title="Upload an Item"
-          color="#841584"
-          accessibilityLabel="View the Inventory"
-        />
-        <FilterSection/>
+        <FilterInventory/>
         <Inventory/>
 
 

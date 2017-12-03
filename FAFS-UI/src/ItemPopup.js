@@ -16,7 +16,7 @@ import { defaultStyles } from './styles';
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
-const defaultHeight = height * 0.67;
+const defaultHeight = height * 0.5;
 
 export default class ItemPopup extends Component {
 
@@ -267,7 +267,7 @@ export default class ItemPopup extends Component {
           {/* Footer */}
           <View style={styles.footer}>
             <TouchableHighlight
-              underlayColor="#9575CD"
+              underlayColor="navy"
               style={styles.buttonContainer}
               onPress={onBook}
             >
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   buttonContainer: {
-    backgroundColor: '#673AB7',
+    backgroundColor: 'navy',
     borderRadius: 100,
     paddingVertical: 10,
     paddingHorizontal: 15,
@@ -350,5 +350,6 @@ const styles = StyleSheet.create({
     ...defaultStyles.text,
     color: '#FFFFFF',
     fontSize: 18,
+    backgroundColor: 'navy'
   },
 });

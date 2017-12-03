@@ -8,28 +8,30 @@ import {
 import {
   Alert
 } from 'react-native';
-//import StartupPageContainer from './src/StartupPageContainer';
+
 
 import InventoryPageContainer from './src/InventoryPageContainer';
-import UploadPageContainer from './src/UploadPageContainer';
-
-import RideRequestsContainer from './src/RideRequestsContainer';
-import UploadDriverContainer from './src/UploadDriverContainer';
-//import DriveRequestsContainer from './src/DriveRequestsContainer';
+import UploadInventoryContainer from './src/UploadInventoryContainer';
+import RidePageContainer from './src/RidePageContainer';
+import UploadRideContainer from './src/UploadRideContainer';
+import UploadPage from './src/UploadPage';
 
 const RouteMapper = (route, navigator) => {
 
   if (route.name === 'inventory') {
     return <InventoryPageContainer navigator={navigator} />;
   }
-  if (route.name === 'upload') {
-    return <UploadPageContainer navigator={navigator}/>;
+  if (route.name === 'upload_inventory') {
+    return <UploadInventoryContainer navigator={navigator}/>;
   }
-  if (route.name === 'ride_requests') {
-    return <RideRequestsContainer navigator={navigator} />;
+  if (route.name === 'rides') {
+    return <RidePageContainer navigator={navigator} />;
   }
-  if (route.name === 'upload_ride_driver') {
-    return <UploadDriverContainer navigator={navigator} />;
+  if (route.name === 'upload_ride') {
+    return <UploadRideContainer navigator={navigator} />;
+  }
+  if (route.name === 'upload_page') {
+    return <UploadPage navigator={navigator}/>
   }
 };
 
