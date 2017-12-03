@@ -273,13 +273,16 @@ const searchByKey = (myArray, searchKey) => {
 }
 
 const searchRidesByKey = (myArray, origin, destination, date) => {
+
   origin = origin.toLowerCase();
   destination = destination.toLowerCase();
-  date = date.split("-");
-  var searchYear = date[0];
-  var searchMonth = date[1];
-  var searchDate = date[2];
-  let searchedWords = myArray.slice().filter(ride => {
+  let searchedWords;
+  if (date.length > 0) {
+    date = date.split("-");
+    var searchYear = date[0];
+    var searchMonth = date[1];
+    var searchDate = date[2];
+    searchedWords = myArray.slice().filter(ride => {
     dateArray = ride.date.split("/");
     var month = dateArray[0];
     var date = dateArray[1];
@@ -287,7 +290,15 @@ const searchRidesByKey = (myArray, origin, destination, date) => {
     if (ride.start.toLowerCase().includes(origin) && ride.dest.toLowerCase().includes(destination) && month.includes(searchMonth) && date.includes(searchDate) && year.includes(searchYear)) {
       return ride;
     }
-  });
+    });
+  } else {
+    searchedWords = myArray.slice().filter(ride => {
+      if (ride.start.toLowerCase().includes(origin) && ride.dest.toLowerCase().includes(destination)) {
+        return ride;
+      }
+    });
+  }
+
   return searchedWords;
 }
 
