@@ -5,10 +5,17 @@ import router from './router';
 var bodyParser = require('body-parser');
 const cors = require('cors');
 
-
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost/fafs');
 
+
+{/*
+
+The code for this portion has been modified from https://github.com/rationalappdev/MovieTicketsBackend
+
+MovieTicketsBackend/server.js
+
+*/}
 
 // Initialize http server
 const app = express();

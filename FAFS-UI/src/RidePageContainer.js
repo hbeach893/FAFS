@@ -21,8 +21,6 @@ export default class RidePageContainer extends Component {
         <NavBar navigator={this.props.navigator}/>
         <FilterRides/>
         <Rides/>
-
-
       </View>
     )
   }

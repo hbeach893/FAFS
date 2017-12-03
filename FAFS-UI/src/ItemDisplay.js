@@ -9,17 +9,24 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
+
+{/*
+
+The code for this portion has been modified from https://github.com/rationalappdev/MovieTickets
+
+MovieTickets/src/MoviePosters.js
+
+*/}
+
+
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
-// How many posters we want to have in each row and column
+
 const cols = 3, rows = 3;
 
 export default class ItemDisplay extends Component {
-  // Component prop types
-  static propTypes = {
-    // Movie object with title, genre, and poster
+  static propTypes = { 
     item: PropTypes.object.isRequired,
-    // Called when user taps on a poster
     onOpen: PropTypes.func.isRequired,
   }
   render() {

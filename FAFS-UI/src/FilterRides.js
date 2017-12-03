@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   TextInput,
-  Alert,
   Button, 
   Text
 } from 'react-native';
@@ -74,7 +73,6 @@ export default class FilterRides extends Component {
               dateInput: {
                 marginLeft: 36
               }
-              // ... You can check the source to find the other keys. 
             }}
             onDateChange={(date) => {this.setState({date: date})}}
           />

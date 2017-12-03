@@ -13,6 +13,16 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
+
+
+{/*
+
+The code for this portion has been modified from https://github.com/rationalappdev/MovieTickets
+
+MovieTickets/src/MoviePopup.js
+
+*/}
+
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
@@ -22,11 +32,7 @@ export default class ItemPopup extends Component {
 
   static propTypes = {
 	isOpen: PropTypes.bool.isRequired,
-    // Movie object that has title, genre, poster, days and times
     item: PropTypes.object,
-    // Index of chosen day
-    onBook: PropTypes.func,
-    // Gets called when popup closed
     onClose: PropTypes.func,
   }
 
@@ -233,16 +239,13 @@ export default class ItemPopup extends Component {
 
           {/* Content */}
           <View style={styles.content}>
-            {/* Movie poster, title and genre */}
             <View
               style={[styles.movieContainer, this.getStyles().movieContainer]}
               {...this._panResponder.panHandlers}
             >
-              {/* Poster */}
               <View style={[styles.imageContainer, this.getStyles().imageContainer]}>
                 <Image source={{ uri: image }} style={styles.image} />
               </View>
-              {/* Title and genre */}
               <View style={[styles.movieInfo, this.getStyles().movieInfo]}>
                 <Text style={[styles.title, this.getStyles().title]}>{title}</Text>
                 <Text style={styles.desc}>{desc}</Text>

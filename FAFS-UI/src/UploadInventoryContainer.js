@@ -40,8 +40,8 @@ export default class UploadPageContainer extends Component {
       itemObj.datePosted = new Date();
       itemObj.type = [item.type];
       this.props.addItem(itemObj);
-
     }
+    
     return (
       <View style={styles.container}>
         <NavBar navigator={this.props.navigator}/>

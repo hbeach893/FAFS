@@ -5,15 +5,25 @@ import {
   Text,
   View
 } from 'react-native';
-//import { inventory } from './data';
+
 import ItemDisplay from './ItemDisplay';
 import ItemPopup from './ItemPopup';
 import { connect } from 'react-redux';
 import {
   ActivityIndicator,
   RefreshControl,
-  // ...others
 } from 'react-native';
+
+
+{/*
+
+The code for this portion has been modified from https://github.com/rationalappdev/MovieTickets
+
+MovieTickets/src/Movies.js
+
+*/}
+
+
 
 
 @connect(
@@ -29,7 +39,6 @@ import {
 
 
 export default class Inventory extends Component {
-  // Add starting here
   state = {
     popupIsOpen: false,
   }
@@ -47,19 +56,14 @@ export default class Inventory extends Component {
     });
   }
 
-
-  // Untill here
   render() {
     const { inventoryitems, loading, refresh, filteredItems } = this.props;
     var inventory = filteredItems.length > 0 ? filteredItems : inventoryitems;
-
-
     return (
       <View style={styles.container}>
       { inventoryitems ?
         <ScrollView
           contentContainerStyle={styles.scrollContent}
-		  // Hide all scroll indicators
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           refreshControl={

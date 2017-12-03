@@ -21,8 +21,6 @@ export default class InventoryPageContainer extends Component {
         <NavBar navigator={this.props.navigator}/>
         <FilterInventory/>
         <Inventory/>
-
-
       </View>
     )
   }

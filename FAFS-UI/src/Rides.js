@@ -30,7 +30,6 @@ import {
 
 export default class Rides extends Component {
 
-  // Untill here
   render() {
    const { loading, refresh, drivers, filteredRides } = this.props;
    var rides = filteredRides.length > 0 ? filteredRides : drivers;
