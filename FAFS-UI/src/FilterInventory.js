@@ -37,7 +37,7 @@ export default class FilterInventory extends Component {
           <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Price: Low to High', 'Price: High to Low', 'A-Z', 'Z-A']} defaultValue="Sort" onSelect={(itemIndex, itemValue) => {
             this.props.sort(this.props.inventoryitems, itemValue, this.props.filterKey);
           }}/>
-          <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['All', 'Furniture', 'Clothes', 'Books', 'Appliances', 'Shoes', 'Accessories']} defaultValue="Filter" onSelect={(itemIndex, itemValue) => {
+          <ModalDropdown style={styles.dropdown} dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['All', 'Furniture', 'Clothes', 'Books', 'Appliances', 'Shoes', 'Accessories', 'Misc.']} defaultValue="Filter" onSelect={(itemIndex, itemValue) => {
             this.props.filter(this.props.inventoryitems, itemValue, this.props.sortKey);
           }}/>
         </View>

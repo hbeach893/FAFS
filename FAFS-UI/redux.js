@@ -134,11 +134,12 @@ const driverStatus = (state = { drivers: [], loadingDrivers: true}, action) => {
     }
 };
 
-const filterInventory = (state = { inventoryitems: [], filteredItems: [], filterKey: '', sortKey: '', searchKey: ''}, action) => {
+const filterInventory = (state = { inventoryitems: [], attemptedFilter: false, filteredItems: [], filterKey: '', sortKey: '', searchKey: ''}, action) => {
   switch(action.type) {
     case 'CLEAR_INVENTORY_FILTERS':
       return {
         ...state,
+        attemptedFilter: false,
         filterKey: '',
         sortKey: '',
         searchKey: '',
@@ -149,6 +150,7 @@ const filterInventory = (state = { inventoryitems: [], filteredItems: [], filter
       var sortedInventoryItems = sortByKey(filteredInventoryItems, state.sortKey);
       return {
         ...state,
+        attemptedFilter: true,
         filterKey: action.filterKey,
         filteredItems: sortedInventoryItems,
       }
@@ -157,6 +159,7 @@ const filterInventory = (state = { inventoryitems: [], filteredItems: [], filter
       var filteredInventoryItems = filterByKey(sortedInventoryItems, state.filterKey);
       return {
         ...state,
+        attemptedFilter: true,
         sortKey: action.sortKey,
         filteredItems: filteredInventoryItems,
       }
@@ -166,6 +169,7 @@ const filterInventory = (state = { inventoryitems: [], filteredItems: [], filter
       var filteredInventoryItems = filterByKey(sortedInventoryItems, state.filterKey);
       return {
         ...state,
+        attemptedFilter: true,
         searchKey: action.searchKey,
         filteredItems: filteredInventoryItems,
       }
@@ -174,11 +178,12 @@ const filterInventory = (state = { inventoryitems: [], filteredItems: [], filter
   } 
 }
 
-const filterRides = (state = {filteredRides: [], drivers: [], origin: '', destination: '', date:''}, action) => {
+const filterRides = (state = {filteredRides: [], attemptedFilter: false, drivers: [], origin: '', destination: '', date:''}, action) => {
   switch(action.type) {
     case 'CLEAR_RIDE_FILTERS':
       return {
         ...state,
+        attemptedFilter: false,
         filteredRides: [],
         drivers: [],
         searchKey: '' 
@@ -187,6 +192,7 @@ const filterRides = (state = {filteredRides: [], drivers: [], origin: '', destin
       var searchedRides = searchRidesByKey(action.drivers, action.origin, action.destination, action.date);
       return {
         ...state,
+        attemptedFilter: true,
         searchKey: action.searchKey,
         filteredRides: searchedRides,
       }

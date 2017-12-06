@@ -3,7 +3,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
+  Alert
 } from 'react-native';
 
 import ItemDisplay from './ItemDisplay';
@@ -23,14 +24,12 @@ MovieTickets/src/Movies.js
 
 */}
 
-
-
-
 @connect(
   state => ({
     inventoryitems: state.inventoryStatus.inventoryitems,
     loading: state.inventoryStatus.loading,
     filteredItems: state.filterInventory.filteredItems,
+    attemptedFilter: state.filterInventory.attemptedFilter,
   }),
   dispatch => ({
     refresh: () => dispatch({type: 'GET_INVENTORY_DATA', inventoryitems: [], loading:true}),
@@ -57,12 +56,13 @@ export default class Inventory extends Component {
   }
 
   render() {
-    const { inventoryitems, loading, refresh, filteredItems } = this.props;
-    var inventory = filteredItems.length > 0 ? filteredItems : inventoryitems;
+    const { inventoryitems, loading, refresh, filteredItems, attemptedFilter } = this.props;
+    var inventory = attemptedFilter ? filteredItems : inventoryitems;
     return (
       <View style={styles.container}>
-      { inventoryitems ?
+      { inventory.length > 0 ?
         <ScrollView
+
           contentContainerStyle={styles.scrollContent}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
@@ -79,22 +79,20 @@ export default class Inventory extends Component {
             key={index}
           />)}
         </ScrollView>
-        : <ActivityIndicator
-              animating={loading}
-              style={styles.loader}
-              size="large"
-            />
+        : 
+         <Text> We're sorry. We cannot find the item want. </Text>
           }
+
         <ItemPopup
           item={this.state.item}
           isOpen={this.state.popupIsOpen}
           onClose={this.closeItem}
         />
+      
       </View>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

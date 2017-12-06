@@ -21,6 +21,7 @@ import {
     drivers: state.driverStatus.drivers,
     loading: state.driverStatus.loadingDrivers,
     filteredRides: state.filterRides.filteredRides,
+    attemptedFilter: state.filterRides.attemptedFilter,
   }),
   dispatch => ({
     refresh: () => dispatch({type: 'GET_RIDER_DATA', drivers: [], loadingDrivers:true}),
@@ -31,11 +32,11 @@ import {
 export default class Rides extends Component {
 
   render() {
-   const { loading, refresh, drivers, filteredRides } = this.props;
-   var rides = filteredRides.length > 0 ? filteredRides : drivers;
+   const { loading, refresh, drivers, filteredRides, attemptedFilter } = this.props;
+   var rides = attemptedFilter ? filteredRides : drivers;
     return (
       <View style={styles.container}>
-      { rides ?
+      { rides.length > 0 ?
         <ScrollView
           contentContainerStyle={styles.scrollContent}
 		  // Hide all scroll indicators
@@ -54,11 +55,7 @@ export default class Rides extends Component {
             key={index}
           />)}
         </ScrollView>
-        : <ActivityIndicator
-              animating={loading}
-              style={styles.loader}
-              size="large"
-            />
+        :  <Text> We're sorry. We cannot find the ride you want. </Text>
           }
 
       </View>

@@ -26,7 +26,7 @@ const validate = values => {
   if(!values.email) {
     errors.email = 'Middlebury email is required.'
   } else if (!/^[A-Z0-9._%+-]+@middlebury.edu/i.test(values.email)) {
-    errors.email = 'Invalid email address'
+    errors.email = 'Middlebury email is required.'
   }
   if(values.type == 'Select' || values.type == undefined) {
     errors.type = 'Type of Item is Required'
@@ -74,20 +74,6 @@ function InventoryForm(props) {
         component={MyDropdown}
         placeholder={'Type of item'}
       />
-      {/*
-      <Text style={{ fontWeight: 'bold', marginTop: 20 }}>Type of Item</Text>
-      <ModalDropdown style={styles.dropdown} name="type" dropdownStyle = {styles.dropdownStyle} textStyle = {styles.dropdownDefaultText} dropdownTextStyle={styles.dropdownText} options={['Furniture', 'Clothes', 'Appliances', 'Shoes', 'Accessory']} defaultValue="Filter"
-        />
-      */}
-
-      {/*
-      <Text style={{ fontWeight: 'bold', marginTop: 20, marginBottom: 20}}>Choose tags:</Text>
-        <Field
-          name={'itemTags'}
-          component={MyMultiselectAttempt}
-          data={['animal', 'vegetable', 'mineral']}
-      />
-      */}
       <TouchableOpacity onPress={props.handleSubmit}>
         <Text style={styles.formSubmit}>Submit!</Text>
       </TouchableOpacity>

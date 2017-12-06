@@ -28,7 +28,7 @@ export default class UploadRideContainer extends Component {
     var timeArray = drive.time.split(':');
     var hours = timeArray[0];
     var minutes = timeArray[1];
-    var minutes = minutes.length > 1 ? minues : "0" + minutes;
+    var minutes = minutes.length > 1 ? minutes : "0" + minutes;
     var time = hours + ":" + minutes;
     driveObj.start = drive.start;
     driveObj.dest = drive.dest;
