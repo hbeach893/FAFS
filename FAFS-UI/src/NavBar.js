@@ -25,6 +25,7 @@ export default class NavBar extends Component {
         <View style = {styles.buttonsContainer}>
           <Button large
             color = "white"
+            fontWeight = "bold"
             onPress={() => {this.props.navigator.push({name: 'inventory'}); this.props.refreshInventory()}}
             title="INVENTORY"
             accessibilityLabel="Upload an item"
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: 'navy'
-    //height: '5%',
+    backgroundColor: 'navy',
+    //height: '10%',
    },
 });

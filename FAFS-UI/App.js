@@ -16,6 +16,17 @@ import RidePageContainer from './src/RidePageContainer';
 import UploadRideContainer from './src/UploadRideContainer';
 import UploadPage from './src/UploadPage';
 
+
+{/*
+  A few parts of this project have been built from the help of a 3 part tutorial on rational app dev
+  - rationalappdev.com/movie-tickets-booking-app-with-react-native/
+  - rationalappdev.com/storing-data-from-api-with-redux-in-react-native-apps/
+  - rationalappdev.com/api-backend-with-nodejs-express-and-mongodb-for-react-native-apps/
+
+*/}
+
+
+
 const RouteMapper = (route, navigator) => {
 
   if (route.name === 'inventory') {
