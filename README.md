@@ -22,9 +22,13 @@ To install the dependencies for the server:
 
 To start the server:
 
+`cd FAFS/FAFS-API`
+
 `npm start`
 
 To load the UI for ios:
+
+`cd FAFS/FAFS-UI`
 
 `npm run ios`
 
